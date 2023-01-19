@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/libakary/marble-races-api/issues"
   },
-  "homepage": "https://github.com/libakary/marble-races-api#readme"
+  "homepage": "https://github.com/libakary/marble-races-api#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
