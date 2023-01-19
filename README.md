@@ -1,2 +1,3 @@
 # marble-races-api
-Marble Races API
+
+## Developers: Karol Kaljuste
