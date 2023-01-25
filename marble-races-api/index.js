@@ -4,6 +4,11 @@ const port = process.env.APP_PORT
 
 const swaggerUI = require("swagger-ui-express")
 const swaggerDocument = require("./docs/swagger.json")
+
+app.get('/marbles', (req, res) => {
+    res.send(["Yellow Mellow", "Thunderbolts"])
+})
+
 app.use("/docs",swaggerUI.serve,swaggerUI.setup(swaggerDocument))
 
 app.listen(port,()=>{
