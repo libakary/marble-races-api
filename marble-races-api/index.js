@@ -36,6 +36,22 @@ app.get("/customers", async(req, res)=>{
     
 })
 
+app.get("/competitions", async(req, res)=>{
+    let connection 
+    try {
+        connection = await pool.getConnection()
+        const rows = await connection.query("SELECT id, competitionName FROM competitions")
+        console.log(rows)
+        res.send(JSON.stringify(rows))
+        
+    } catch (error) {
+        throw error
+    } finally {
+        if (connection) return connection.end()
+    }
+    
+})
+
 
 app.listen(port,()=>{
     console.log(`API up at http://localhost:${port}`)
