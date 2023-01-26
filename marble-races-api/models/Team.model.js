@@ -8,8 +8,23 @@ module.exports = (sequilize, Sequilize) => {
         teamName: {
             type: Sequilize.STRING,
             allowNull: false
+        },
+        nrOfTeammates: {
+            type: Sequilize.INTEGER,
+            allowNull: false
+        },
+        teamLeader: {
+            type: Sequilize.STRING,
+            allowNull: false,
+        },
+        jama: {
+            type: Sequilize.STRING,
+            allowNull: false,
+        },
+        country: {
+            type: Sequilize.STRING,
+            allowNull: false
         }
-
     })
 return Team
 }

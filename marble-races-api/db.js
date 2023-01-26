@@ -16,4 +16,8 @@ db.Sequelize = Sequelize
 db.Sequelize = sequelize
 db.teams = require('./models/Team.model')(sequelize, Sequelize)
 
-module.exports = db
+async function Sync() {
+    await sequelize.sync({alter: true}) //alter tabel
+    //                   {force: true}  //erase and recreate
+}
+module.exports = {db, Sync}
