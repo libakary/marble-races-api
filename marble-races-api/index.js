@@ -1,17 +1,19 @@
 require("dotenv").config()
 const app = require("express")()
-const mariadb = require("mariadb")
 const port = process.env.APP_PORT
 
 const swaggerUI = require("swagger-ui-express")
 const swaggerDocument = require("./docs/swagger.json")
 
-app.get('/marbles', (req, res) => {
+app.get('/marbles', (req, res) => { //teams nüüd i guess
     res.send(["Yellow Mellow", "Thunderbolts"])
 })
 
 app.use("/docs",swaggerUI.serve,swaggerUI.setup(swaggerDocument))
 
+
+require("./routes/app_routes")(app)
+=======
 const pool = mariadb.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -60,7 +62,7 @@ app.get("/teams", async(req, res)=>{
     
 })
 
-
-app.listen(port,()=>{
+app.listen(port,async()=>{
+    await require("./db").Sync()
     console.log(`API up at http://localhost:${port}`)
 })
