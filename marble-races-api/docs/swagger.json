@@ -12,7 +12,7 @@
         "/marbles": {
             "get": {
                 "tags": [
-                    "marbles"
+                    "teams"
                 ],
                 "responses": {
                     "200": {
@@ -39,6 +39,16 @@
                 },
                 "summary": "Get a list of teams",
                 "description": "Returns a list of teams in API"
+            },
+            "post": {
+                "requestBody": {
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "kõik ok"
+                    }
+                }
             }
         }
     }
