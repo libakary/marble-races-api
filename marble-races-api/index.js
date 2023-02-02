@@ -11,7 +11,6 @@ app.get('/marbles', (req, res) => { //teams nüüd i guess
 
 app.use("/docs",swaggerUI.serve,swaggerUI.setup(swaggerDocument))
 
-
 require("./routes/app_routes")(app)
 
 app.listen(port,async()=>{
