@@ -11,7 +11,7 @@ module.exports = (app) => {
     //    .delete(teamsController.deleteById);    //delete
     //app.route("/competitions")
 
-    app.route("competitions")
+    app.route("/competitions")
         .get(competitionsController.getAll)
     app.route("/competitions/:id")
         .get(competitionsController.getById) //read

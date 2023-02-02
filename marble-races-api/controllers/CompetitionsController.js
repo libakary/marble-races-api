@@ -8,5 +8,11 @@ exports.getAll = async(req, res)=>{
 
 exports.getById = async (req,res)=> {
     const competitions = await Competition.findByPk(req.params.id)
+
+    if (competitions == null) {
+        res.status(404).send({"error":"Not Found"})
+        return;
+    }
+    
     res.send(competitions)
 }
