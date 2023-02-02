@@ -4,7 +4,11 @@
   "description": "Marble Races API\r ## developers: Emma Mae Roodla",
   "main": "index.js",
   "scripts": {
+    "start": "npx nodemon .",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "nodemonConfig": {
+    "ext": "js,json,yaml"
   },
   "repository": {
     "type": "git",
