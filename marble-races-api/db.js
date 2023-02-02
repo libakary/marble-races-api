@@ -15,6 +15,7 @@ const db = {}
 db.Sequelize = Sequelize
 db.Sequelize = sequelize
 db.teams = require('./models/Team.model')(sequelize, Sequelize)
+db.competitions = require('./models/Competition.model')(sequelize, Sequelize)
 
 async function Sync() {
     await sequelize.sync({alter: true}) //alter tabel
