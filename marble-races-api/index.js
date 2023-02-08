@@ -7,12 +7,8 @@ app.use(express.json())
 
 const swaggerUI = require("swagger-ui-express")
 const yamljs = require('yamljs')
-const swaggerDocument = yamljs.load('./docss/swagger.yaml');
+const swaggerDocument = yamljs.load('./docs/swagger.yaml')
 //const swaggerDocument = require("./docs/swagger.json")
-
-app.get('/marbles', (req, res) => { //teams nüüd i guess
-    res.send(["Yellow Mellow", "Thunderbolts"])
-})
 
 app.use("/docs",swaggerUI.serve,swaggerUI.setup(swaggerDocument))
 
