@@ -40,6 +40,68 @@
                 "summary": "Get a list of teams",
                 "description": "Returns a list of teams in API"
             }
+        },
+
+        "/competitions": {
+            "get": {
+                "tags": [
+                    "competitions"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of Competitions": {
+                                        "value": "[\n    \"Võistlus\"\n    \"Meistrivõistlus\"\n    ]"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of competitions"
+                    }
+                },
+                "operationId": "#184268001",
+                "summary": "Get a list of all competitions",
+                "description": "Returns a list of all competitions in API"
+            },
+            "post": {
+                "tags": [
+                    "competitions"
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "Example of entry": {
+                                        "value": [
+                                            "Comp name",
+                                            "Comp date"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Creates new entry with entered variables"
+                    }
+                },
+                "operationId": "#184268298",
+                "summary": "Add competitions and add info on lines for competitions",
+                "description": "Create new competition, add variables\n"
+            }
         }
     }
 }
