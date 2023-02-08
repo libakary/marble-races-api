@@ -6,7 +6,9 @@ const port = process.env.APP_PORT
 app.use(express.json())
 
 const swaggerUI = require("swagger-ui-express")
-const swaggerDocument = require("./docs/swagger.json")
+const yamljs = require('yamljs')
+const swaggerDocument = yamljs.load('./docss/swagger.yaml');
+//const swaggerDocument = require("./docs/swagger.json")
 
 app.get('/marbles', (req, res) => { //teams nüüd i guess
     res.send(["Yellow Mellow", "Thunderbolts"])

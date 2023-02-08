@@ -67,7 +67,7 @@
                         "description": "Returns a list of competitions"
                     }
                 },
-                "operationId": "#184268001",
+                "operationId": "#184267953",
                 "summary": "Get a list of all competitions",
                 "description": "Returns a list of all competitions in API"
             },
