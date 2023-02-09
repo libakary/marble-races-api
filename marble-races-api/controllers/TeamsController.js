@@ -38,7 +38,7 @@ exports.createNew = async(req, res)=>{
 
 getBaseUrl = (request) => {
   return (
-    (request.connection && request.connection.encrypted ? "https" : "http") +
+    (/*request.connection &&*/ request?.connection?.encrypted ? "https" : "http") +
     `://${request.headers.host}`
   )
 }
