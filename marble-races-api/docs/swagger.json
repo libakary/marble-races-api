@@ -1,7 +1,4 @@
-
-
-
-   {
+{
     "openapi": "3.0.2",
     "info": {
         "title": "Marble-Race-API",
@@ -9,6 +6,161 @@
         "description": "### This is a Swagger UI for our Marble Race API  \n\n### Error handling\nErrors are presented using the HTTP status codes 400-599. The response include a more detailed explanation about the error in the body.\n\n```\n{\n  \"error\": \"Cleartext explanation of the error that occurred\"\n}\n```\n\n### Generic API errors\nThese error responses can be returned by any of the described endpoints.\n\n| HTTP status  |  Description |\n|---|---|\n| 400| Bad input parameters or invalid request. More information can be found in the response body.\n| 401| The consumer does not have access to the requested resource or the provided token is not valid.\n| 404| The requested resource can not be found or the user does not have access to the resource.\n| 5XX| A server error has occurred while processing the request."
     },
     "paths": {
+    
+    "/teams": {
+            "get": {
+                "tags": [
+                    "teams"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of teams": {
+                                        "value": [
+                                            "Mellow Yellow",
+                                            "Thunderbolts"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of teams"
+                    }
+                },
+                "summary": "Get a list of teams",
+                "description": "Returns a list of teams in API"
+            },
+            "post": {
+                "requestBody": {
+                    "required": true
+                },
+                "tags": [
+                    "teams"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "kõik ok"
+                    },
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "{                                                 \"id\": 1,                                                 \"teamName\": \"Yellow Mellow\",                                                 \"nrOfTeammates\": 5,                                                 \"teamLeader\": \"Mellow\",                                                 \"country\": \"Italy\"                                             }": {
+                                        "value": [
+                                            "Yellow Mellow",
+                                            5,
+                                            "Mellow",
+                                            "Italy"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "creates new entry"
+                    }
+                },
+                "summary": "add teams",
+                "description": "create new team, add variables"
+            }
+        },
+        "/teams/{id}": {
+            "get": {
+                "tags": [
+                    "details"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "full details of a given team": {
+                                        "value": "{\n        \"id\": 1,\n        \"teamName\": \"Yellow Mellow\",\n        \"nrOfTeammates\": 5,\n        \"teamLeader\": \"Mellow\",\n        \"country\": \"Italy\"\n    }\n"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "kõik ok"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Team /w+ was not found": {
+                                        "value": {
+                                            "error": "Game \\w+ was not found in game array"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Team was not found in teams array"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "Server error": {
+                                        "value": [
+                                            "L"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "suht pekkis"
+                    }
+                },
+                "operationId": "id",
+                "summary": "get full details of the team",
+                "description": "returns full details of a given id team"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "error": {
+                "title": "Root Type for error",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "error": "Error message."
+                }
+            }
+        },
         "/competitions": {
             "get": {
                 "tags": [
@@ -232,6 +384,7 @@
                     "registeredTeams": "jama",
                     "location": "Tartu",
                     "organizer": "Bossworm"
+
                 }
             }
         }
