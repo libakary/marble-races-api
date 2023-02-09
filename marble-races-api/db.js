@@ -6,6 +6,9 @@ const sequelize = new Sequelize(
     {
         host: process.env.DB_HOST,
         dialect:'mariadb',
+        dialectOptions: {
+            connectTimeout: 1000
+        },
         define: {
             timestamps: false
         }
@@ -13,7 +16,7 @@ const sequelize = new Sequelize(
 )
 const db = {}
 db.Sequelize = Sequelize
-db.Sequelize = sequelize
+db.sequelize = sequelize
 db.teams = require('./models/Team.model')(sequelize, Sequelize)
 db.competitions = require('./models/Competition.model')(sequelize, Sequelize)
 

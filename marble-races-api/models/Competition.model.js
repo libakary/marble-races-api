@@ -1,5 +1,5 @@
 module.exports = (sequilize, Sequilize) => {
-    const Competition = sequilize.define('competition', {
+    const Competition = sequilize.define("competition", {
         id: {
             type: Sequilize.INTEGER,
             primaryKey: true,

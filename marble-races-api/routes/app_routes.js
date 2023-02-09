@@ -4,7 +4,7 @@ const competitionsController = require('../controllers/CompetitionsController.js
 module.exports = (app) => {
     app.route("/teams")
         .get(teamsController.getAll)
-    //    .post(teamsController.createNew);       //create
+        //.post(teamsController.createNew);       //create
     app.route("/teams/:id")
         .get(teamsController.getById)           //read
     //    .put(teamsController.updateById)        //update
@@ -13,6 +13,7 @@ module.exports = (app) => {
 
     app.route("/competitions")
         .get(competitionsController.getAll)
+        .post(competitionsController.createNew); // create
     app.route("/competitions/:id")
         .get(competitionsController.getById) //read
 }

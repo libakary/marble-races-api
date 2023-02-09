@@ -1,13 +1,14 @@
 require("dotenv").config()
-const app = require("express")()
+const express = require("express")
+const app = express()
 const port = process.env.APP_PORT
 
-const swaggerUI = require("swagger-ui-express")
-const swaggerDocument = require("./docs/swagger.json")
+app.use(express.json())
 
-app.get('/marbles', (req, res) => { //teams nüüd i guess
-    res.send(["Yellow Mellow", "Thunderbolts"])
-})
+const swaggerUI = require("swagger-ui-express")
+//const yamljs = require('yamljs')
+//const { swaggerDocument }= yamljs.load('./docs/swagger.yaml')
+const swaggerDocument = require("./docs/swagger.json")
 
 app.use("/docs",swaggerUI.serve,swaggerUI.setup(swaggerDocument))
 
