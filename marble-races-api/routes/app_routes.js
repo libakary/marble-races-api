@@ -7,7 +7,7 @@ module.exports = (app) => {
         .post(teamsController.createNew);       //create
     app.route("/teams/:id")
         .get(teamsController.getById)           //read
-    //    .put(teamsController.updateById)        //update
+        .put(teamsController.updateById)        //update
         .delete(teamsController.deleteById);    //delete
 
     app.route("/competitions")
