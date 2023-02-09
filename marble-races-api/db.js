@@ -19,6 +19,7 @@ db.Sequelize = Sequelize
 db.sequelize = sequelize
 db.teams = require('./models/Team.model')(sequelize, Sequelize)
 db.competitions = require('./models/Competition.model')(sequelize, Sequelize)
+db.signups = require('./models/Signups.model')(sequelize, Sequelize, db.teams, db.competitions)
 
 async function Sync() {
     await sequelize.sync({alter: true}) //alter tabel
