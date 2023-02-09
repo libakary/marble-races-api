@@ -118,7 +118,7 @@
                                 "examples": {
                                     "Full details of a competition": {
                                         "value": [
-                                            2324234,
+                                            2,
                                             "Meistrivõistlus",
                                             "20.04.2023",
                                             "Slaalom",
@@ -225,9 +225,8 @@
                     }
                 },
                 "example": {
-                    "id": 234324,
                     "competitionName": "Meistrivõistlus",
-                    "date": "20.04.2023 :)",
+                    "date": "2022-02-06",
                     "trackType": "Slaalom",
                     "numberOfTeams": 5,
                     "registeredTeams": "jama",
