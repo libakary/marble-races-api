@@ -7,7 +7,7 @@
     },
     "paths": {
     
-    "/teams": {
+        "/teams": {
             "get": {
                 "tags": [
                     "teams"
@@ -142,22 +142,32 @@
                 "operationId": "id",
                 "summary": "get full details of the team",
                 "description": "returns full details of a given id team"
-            }
-        }
-    },
-    "components": {
-        "schemas": {
-            "error": {
-                "title": "Root Type for error",
-                "description": "",
-                "type": "object",
-                "properties": {
-                    "error": {
-                        "type": "string"
+            },
+            "delete": {
+                "responses": {
+                    "204": {
+                        "description": "no content"
+                    },
+                    "404": {
+                        "description": "non team"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Server error": {
+                                        "value": {
+                                            "error": "pekki läks"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "server messed up"
                     }
-                },
-                "example": {
-                    "error": "Error message."
                 }
             }
         },
@@ -306,6 +316,52 @@
                 "operationId": "#184268001",
                 "summary": "Get full details of the competition with given ID",
                 "description": "Return all the details of the competition\n"
+            },
+            "delete": {
+                "tags": [
+                    "competitions"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Not found": {
+                                        "value": {
+                                            "error": "Entry not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Entry does not exist"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Example": {
+                                        "value": {
+                                            "error": "Something went wrong on our side :/"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Server messed up"
+                    }
+                },
+                "operationId": "#184268390",
+                "summary": "Remove game"
             },
             "parameters": [
                 {
