@@ -8,8 +8,7 @@ module.exports = (app) => {
     app.route("/teams/:id")
         .get(teamsController.getById)           //read
     //    .put(teamsController.updateById)        //update
-    //    .delete(teamsController.deleteById);    //delete
-    //app.route("/competitions")
+        .delete(teamsController.deleteById);    //delete
 
     app.route("/competitions")
         .get(competitionsController.getAll)

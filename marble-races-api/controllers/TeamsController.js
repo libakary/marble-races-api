@@ -36,6 +36,23 @@ exports.createNew = async(req, res)=>{
     .json(team)
 }
 
+exports.deleteById = async(req, res) =>{
+  let result
+  try {
+    const result = await Team.destroy({where: {id:req.params.id}})
+  } catch (error) {
+    console.log("TeamsDelete: ",error)
+    res.status(500).send({"error":"Something went wrong"})
+    return
+  }
+  if (result === 0) {
+    res.status(404).send({error: "Game not found"})
+    return
+  }
+  console.log(result)
+  res.status(204).send({error:"no content"})
+}
+
 getBaseUrl = (request) => {
   return (
     (/*request.connection &&*/ request?.connection?.encrypted ? "https" : "http") +
