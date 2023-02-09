@@ -13,7 +13,8 @@ module.exports = (app) => {
 
     app.route("/competitions")
         .get(competitionsController.getAll)
-        .post(competitionsController.createNew); // create
     app.route("/competitions/:id")
         .get(competitionsController.getById) //read
+        .put(competitionsController.updateById)
+        //.delete(competitionsController.deleteById);
 }

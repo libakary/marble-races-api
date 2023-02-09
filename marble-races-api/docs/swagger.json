@@ -7,7 +7,7 @@
     },
     "paths": {
     
-    "/teams": {
+        "/teams": {
             "get": {
                 "tags": [
                     "teams"
@@ -142,22 +142,32 @@
                 "operationId": "id",
                 "summary": "get full details of the team",
                 "description": "returns full details of a given id team"
-            }
-        }
-    },
-    "components": {
-        "schemas": {
-            "error": {
-                "title": "Root Type for error",
-                "description": "",
-                "type": "object",
-                "properties": {
-                    "error": {
-                        "type": "string"
+            },
+            "delete": {
+                "responses": {
+                    "204": {
+                        "description": "no content"
+                    },
+                    "404": {
+                        "description": "non team"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Server error": {
+                                        "value": {
+                                            "error": "pekki läks"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "server messed up"
                     }
-                },
-                "example": {
-                    "error": "Error message."
                 }
             }
         },
@@ -255,7 +265,7 @@
             "description": "Get all the details of a competition with the given id",
             "get": {
                 "tags": [
-                    "competitions"
+                    "details"
                 ],
                 "responses": {
                     "200": {
@@ -268,9 +278,8 @@
                                     }
                                 },
                                 "examples": {
-                                    "Full details of a competition": {
+                                    "Full details of a given competition": {
                                         "value": [
-                                            2,
                                             "Meistrivõistlus",
                                             "20.04.2023",
                                             "Slaalom",
@@ -283,7 +292,7 @@
                                 }
                             }
                         },
-                        "description": "Competition was found and the details are returned"
+                        "description": "Returns full details of a given id competition"
                     },
                     "404": {
                         "content": {
@@ -292,25 +301,162 @@
                                     "$ref": "#/components/schemas/error"
                                 },
                                 "examples": {
-                                    "Game not found": {
+                                    "Competition /w+ was not found": {
                                         "value": {
-                                            "error": "Competition with the given id was not found."
+                                            "error": "Competition \\w+ was not found in competition array"
                                         }
                                     }
                                 }
                             }
                         },
-                        "description": "Competition with the given ID does not exist"
+                        "description": "Competition was not found in competitions array"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "No pekki": {
+                                        "value": [
+                                            "L"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Server error"
                     }
                 },
                 "operationId": "#184268001",
-                "summary": "Get full details of the competition with given ID",
-                "description": "Return all the details of the competition\n"
+                "summary": "Get full details of a competition",
+                "description": "Returns full details of a given id competition"
+            },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Competitions"
+                            },
+                            "examples": {
+                                "??": {
+                                    "value": [
+                                        "Meistrivõistlus",
+                                        "20.04.2023",
+                                        "Slaalom",
+                                        5,
+                                        "jama",
+                                        "Tartu",
+                                        "Bossworm"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "competitions"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Competitions"
+                                },
+                                "examples": {
+                                    "New changed full details": {
+                                        "value": [
+                                            "Meistrivõistlus",
+                                            "20.04.2023",
+                                            "Slaalom",
+                                            5,
+                                            "jama",
+                                            "Tartu",
+                                            "Bossworm"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "All good"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "description": "Server fucke dup"
+                    }
+                },
+                "operationId": "#184438658",
+                "summary": "Update competitions"
+            },
+            "delete": {
+                "tags": [
+                    "competitions"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Not found": {
+                                        "value": {
+                                            "error": "Entry not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Entry does not exist"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Example": {
+                                        "value": {
+                                            "error": "Something went wrong on our side :/"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Server messed up"
+                    }
+                },
+                "operationId": "#184268390",
+                "summary": "Remove game"
             },
             "parameters": [
                 {
                     "name": "id",
-                    "description": "Id of the Competition to get the details",
                     "schema": {
                         "type": "integer"
                     },
