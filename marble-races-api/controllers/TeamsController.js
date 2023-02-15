@@ -36,9 +36,49 @@ exports.createNew = async(req, res)=>{
     .json(team)
 }
 
+exports.deleteById = async(req, res) =>{
+  let result
+  try {
+    const result = await Team.destroy({where: {id:req.params.id}})
+  } catch (error) {
+    console.log("TeamsDelete: ",error)
+    res.status(500).send({"error":"Something went wrong"})
+    return
+  }
+  if (result === 0) {
+    res.status(404).send({error: "Game not found"})
+    return
+  }
+  console.log(result)
+  res.status(204).send({error:"no content"})
+}
+
+exports.updateById = async(req, res) =>{
+  let result
+  delete req.body.id
+  try {
+    const result = await Team.update(req.body,{where: {id:req.params.id}})
+  } catch (error) {
+    console.log("TeamsUpdate: ",error)
+    res.status(500).send({"error":"Something went wrong"})
+    return
+  }
+  if (result === 0) {
+    res.status(404).send({error: "Game not found"})
+    return
+  }
+  const teams = await Team.findByPk(req.params.id)
+  res.status(200)
+    .location(`${getBaseUrl(req)}/teams/${team.id}`)//.send({error:"no content"})
+    .json(team)
+}
+
 getBaseUrl = (request) => {
   return (
     (/*request.connection &&*/ request?.connection?.encrypted ? "https" : "http") +
     `://${request.headers.host}`
   )
 }
+
+/////////////////////////
+
