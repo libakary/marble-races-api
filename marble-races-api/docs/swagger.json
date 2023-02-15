@@ -35,11 +35,13 @@
                         "description": "Returns a list of teams"
                     }
                 },
+                "operationId": "#184268094",
                 "summary": "Get a list of teams",
                 "description": "Returns a list of teams in API"
             },
             "post": {
                 "requestBody": {
+                    "description": "A new team to be created",
                     "required": true
                 },
                 "tags": [
@@ -47,19 +49,16 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "kõik ok"
+                        "description": "Kõik korras"
                     },
                     "201": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
+                                    "$ref": "#/components/schemas/Teams"
                                 },
                                 "examples": {
-                                    "{                                                 \"id\": 1,                                                 \"teamName\": \"Yellow Mellow\",                                                 \"nrOfTeammates\": 5,                                                 \"teamLeader\": \"Mellow\",                                                 \"country\": \"Italy\"                                             }": {
+                                    "Team data": {
                                         "value": [
                                             "Yellow Mellow",
                                             5,
@@ -70,10 +69,28 @@
                                 }
                             }
                         },
-                        "description": "creates new entry"
+                        "description": "Creates new entry with entered variables"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Missing parameters": {
+                                        "value": {
+                                            "error": "Parameters are missing"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "One or all params are missing"
                     }
                 },
-                "summary": "add teams",
+                "operationId": "#184268296",
+                "summary": "Add teams",
                 "description": "create new team, add variables"
             }
         },
@@ -81,6 +98,16 @@
             "get": {
                 "tags": [
                     "details"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -93,13 +120,18 @@
                                     }
                                 },
                                 "examples": {
-                                    "full details of a given team": {
-                                        "value": "{\n        \"id\": 1,\n        \"teamName\": \"Yellow Mellow\",\n        \"nrOfTeammates\": 5,\n        \"teamLeader\": \"Mellow\",\n        \"country\": \"Italy\"\n    }\n"
+                                    "Full details of a given team": {
+                                        "value": [
+                                            "Yellow Mellow",
+                                            5,
+                                            "Mellow",
+                                            "Italy"
+                                        ]
                                     }
                                 }
                             }
                         },
-                        "description": "kõik ok"
+                        "description": "returns full details"
                     },
                     "404": {
                         "content": {
@@ -108,24 +140,21 @@
                                     "$ref": "#/components/schemas/error"
                                 },
                                 "examples": {
-                                    "Team /w+ was not found": {
-                                        "value": {
-                                            "error": "Game \\w+ was not found in game array"
-                                        }
+                                    "No examples were found": {
+                                        "value": [
+                                            "Team \\w+ was not found in team array"
+                                        ]
                                     }
                                 }
                             }
                         },
-                        "description": "Team was not found in teams array"
+                        "description": "Not found"
                     },
                     "500": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
+                                    "$ref": "#/components/schemas/error"
                                 },
                                 "examples": {
                                     "Server error": {
@@ -136,12 +165,12 @@
                                 }
                             }
                         },
-                        "description": "suht pekkis"
+                        "description": "Suht pekkis"
                     }
                 },
-                "operationId": "id",
-                "summary": "get full details of the team",
-                "description": "returns full details of a given id team"
+                "operationId": "#184268137",
+                "summary": "get full details of team",
+                "description": "returns details of given id"
             },
             "put": {
                 "requestBody": {
@@ -159,27 +188,54 @@
                 ],
                 "responses": {
                     "200": {
-                        "headers": {
-                            "location": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Teams"
+                                },
+                                "examples": {
+                                    "Entry edited": {
+                                        "value": [
+                                            "Yellow Mellow",
+                                            5,
+                                            "Mellow",
+                                            "Italy"
+                                        ]
+                                    }
                                 }
                             }
                         },
                         "description": "guud"
                     },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Invalid data": {
+                                        "value": {
+                                            "error": "Invalid object data"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Invalid object data"
+                    },
                     "404": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Teams"
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "id not found": {
+                                        "value": {
+                                            "error": "Id not found"
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -189,22 +245,74 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Teams"
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Server error": {
+                                        "value": {
+                                            "error": "Server error"
+                                        }
+                                    }
                                 }
                             }
                         },
                         "description": "server error"
                     }
                 },
+                "operationId": "#184438551",
                 "summary": "update teams"
             },
             "delete": {
+                "tags": [
+                    "teams"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "204": {
-                        "description": "no content"
+                        "description": "Deleted"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "No permission": {
+                                        "value": {
+                                            "error": "No permission for this action"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "No permission"
                     },
                     "404": {
-                        "description": "non team"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "No pole": {
+                                        "value": {
+                                            "error": "Ei leidu"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Entry does not exist"
                     },
                     "500": {
                         "content": {
@@ -221,10 +329,22 @@
                                 }
                             }
                         },
-                        "description": "server messed up"
+                        "description": "Server messed up"
                     }
+                },
+                "operationId": "#184268387",
+                "summary": "Deletes team"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "in": "path",
+                    "required": true
                 }
-            }
+            ]
         },
         "/competitions": {
             "get": {
@@ -257,40 +377,38 @@
             },
             "post": {
                 "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Competition"	
-                            }
-                        }
-                    },
+                    "description": "A new competition to be created",
                     "required": true
                 },
                 "tags": [
                     "competitions"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Kõik korras"
+                    },
                     "201": {
-                        "headers": {
-                            "location": {
+                        "content": {
+                            "application/json": {
                                 "schema": {
-                                    "type": "string"
+                                    "$ref": "#/components/schemas/Competitions"
                                 },
                                 "examples": {
-                                    "Location of created competition": {
-                                        "value": "https://server:port/competitions/{id}"
+                                    "Example of entry": {
+                                        "value": [
+                                            "Meistrivõistlus",
+                                            "20.04.2023",
+                                            "Slaalom",
+                                            5,
+                                            "jama",
+                                            "Tartu",
+                                            "Bossworm"
+                                        ]
                                     }
                                 }
                             }
                         },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Competition"
-                                }
-                            }
-                        },
-                        "description": "Competition was added"
+                        "description": "Creates new entry with entered variables"
                     },
                     "400": {
                         "content": {
@@ -299,20 +417,20 @@
                                     "$ref": "#/components/schemas/error"
                                 },
                                 "examples": {
-                                    "Invalid data": {
+                                    "Missing parameters": {
                                         "value": {
-                                            "error": "Invalid input, missing required parameters"
+                                            "error": "Parameters are missing"
                                         }
                                     }
                                 }
                             }
                         },
-                        "description": "Invalid data supplied"
+                        "description": "One or all params are missing"
                     }
                 },
                 "operationId": "#184268298",
-                "summary": "Add new competition",
-                "description": "Add new competition with all the details\n"
+                "summary": "Add competitions and add info on lines for competitions",
+                "description": "Create new competition, add variables\n"
             }
         },
         "/competitions/{id}": {
@@ -320,7 +438,7 @@
             "description": "Get all the details of a competition with the given id",
             "get": {
                 "tags": [
-                    "details"
+                    "competitions"
                 ],
                 "responses": {
                     "200": {
@@ -369,6 +487,9 @@
                     "500": {
                         "content": {
                             "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
                                 "examples": {
                                     "No pekki": {
                                         "value": [
@@ -391,19 +512,6 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/Competitions"
-                            },
-                            "examples": {
-                                "??": {
-                                    "value": [
-                                        "Meistrivõistlus",
-                                        "20.04.2023",
-                                        "Slaalom",
-                                        5,
-                                        "jama",
-                                        "Tartu",
-                                        "Bossworm"
-                                    ]
-                                }
                             }
                         }
                     },
@@ -414,16 +522,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "headers": {
-                            "location": {}
-                        },
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Competitions"
                                 },
                                 "examples": {
-                                    "New changed full details": {
+                                    "Updated data": {
                                         "value": [
                                             "Meistrivõistlus",
                                             "20.04.2023",
@@ -439,11 +544,35 @@
                         },
                         "description": "All good"
                     },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Invalid data": {
+                                        "value": {
+                                            "error": "Invalid object data"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Invalid object data"
+                    },
                     "404": {
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Id not found": {
+                                        "value": {
+                                            "error": "Id not found"
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -454,6 +583,13 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Server error": {
+                                        "value": {
+                                            "error": "Server error"
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -470,6 +606,23 @@
                 "responses": {
                     "204": {
                         "description": "Deleted"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "No permission": {
+                                        "value": {
+                                            "error": "No permission for this action"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "No permission"
                     },
                     "404": {
                         "content": {
@@ -507,7 +660,7 @@
                     }
                 },
                 "operationId": "#184268390",
-                "summary": "Remove game"
+                "summary": "Delete competition"
             },
             "parameters": [
                 {
@@ -537,7 +690,7 @@
                 }
             },
             "Teams": {
-                "title": "Root Type for Competition",
+                "title": "Root Type for Teams",
                 "description": "Teams details",
                 "required": [
                     "teamName",
