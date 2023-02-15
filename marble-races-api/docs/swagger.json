@@ -317,6 +317,71 @@
                 "summary": "Get full details of the competition with given ID",
                 "description": "Return all the details of the competition\n"
             },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Competitions"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "competitions"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Competitions"
+                                },
+                                "examples": {
+                                    "New changed full details": {
+                                        "value": [
+                                            "Meistrivõistlus",
+                                            "20.04.2023",
+                                            "Slaalom",
+                                            5,
+                                            "jama",
+                                            "Tartu",
+                                            "Bossworm"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "All good"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "description": "Server fucke dup"
+                    }
+                },
+                "operationId": "#184438658",
+                "summary": "Update competitions"
+            },
             "delete": {
                 "tags": [
                     "competitions"
@@ -389,6 +454,55 @@
                 },
                 "example": {
                     "error": "Error message."
+                }
+            },
+            "Teams": {
+                "title": "Root Type for Competition",
+                "description": "Teams details",
+                "required": [
+                    "teamName",
+                    "nrOfTeammates",
+                    "id",
+                    "country"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "",
+                        "type": "integer",
+                        "readOnly": true
+                    },
+                    "teamName": {
+                        "description": "",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "nrOfTeammates": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "teamLeader": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "country": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "jama": {
+                        "description": "",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "id": 55,
+                    "teamName": "some text",
+                    "nrOfTeammates": 34,
+                    "teamLeader": "some text",
+                    "country": "some text",
+                    "jama": "some text"
                 }
             },
             "Competition": {
