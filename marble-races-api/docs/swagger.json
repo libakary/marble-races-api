@@ -500,6 +500,52 @@
                 "operationId": "#184268390",
                 "summary": "Remove game"
             },
+            "delete": {
+                "tags": [
+                    "competitions"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Not found": {
+                                        "value": {
+                                            "error": "Entry not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Entry does not exist"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Example": {
+                                        "value": {
+                                            "error": "Something went wrong on our side :/"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Server messed up"
+                    }
+                },
+                "operationId": "#184268390",
+                "summary": "Remove game"
+            },
             "parameters": [
                 {
                     "name": "id",

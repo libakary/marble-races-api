@@ -55,6 +55,23 @@ exports.updateById = async(req, res) =>{
         .location(`${getBaseUrl(req)}/competitions/${competition.id}`)
         .json(competition)
   }
+  
+exports.deleteById = async(req, res) =>{
+    let result
+    try {
+      const result = await Competition.destroy({where: {id:req.params.id}})
+    } catch (error) {
+      console.log("CompetitionsDelete: ",error)
+      res.status(500).send({"error":"Something went wrong"})
+      return
+    }
+    if (result === 0) {
+      res.status(404).send({error: "Competition not found"})
+      return
+    }
+    console.log(result)
+    res.status(204).send({error:"no content"})
+  }
 
 getBaseUrl = (request) => {
     return (
