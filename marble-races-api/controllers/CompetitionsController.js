@@ -36,6 +36,26 @@ exports.createNew = async (req, res) => {
         .json(competition)
 }
 
+exports.updateById = async(req, res) =>{
+    let result
+    delete req.body.id
+    try {
+      result = await Competition.update(req.body,{where: {id:req.params.id}})
+    } catch (error) {
+      console.log("CompetitionsUpdate: ",error)
+      res.status(500).send({"error":"Something went wrong on our side, sorry"})
+      return
+    }
+    if (result === 0) {
+      res.status(404).send({error: "Competition not found"})
+      return
+    }
+    const competition = await Competition.findByPk(req.params.id)
+    res.status(200)
+        .location(`${getBaseUrl(req)}/competitions/${competition.id}`)
+        .json(competition)
+  }
+  
 exports.deleteById = async(req, res) =>{
     let result
     try {
