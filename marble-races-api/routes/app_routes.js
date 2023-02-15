@@ -12,8 +12,9 @@ module.exports = (app) => {
 
     app.route("/competitions")
         .get(competitionsController.getAll)
+        .post(competitionsController.createNew);
     app.route("/competitions/:id")
         .get(competitionsController.getById) //read
         .put(competitionsController.updateById)
-        //.delete(competitionsController.deleteById);
+        .delete(competitionsController.deleteById);
 }

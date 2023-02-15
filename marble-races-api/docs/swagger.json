@@ -143,6 +143,61 @@
                 "summary": "get full details of the team",
                 "description": "returns full details of a given id team"
             },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Teams"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "teams"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Teams"
+                                }
+                            }
+                        },
+                        "description": "guud"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Teams"
+                                }
+                            }
+                        },
+                        "description": "not found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Teams"
+                                }
+                            }
+                        },
+                        "description": "server error"
+                    }
+                },
+                "summary": "update teams"
+            },
             "delete": {
                 "responses": {
                     "204": {
@@ -349,163 +404,6 @@
                                         "Bossworm"
                                     ]
                                 }
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "tags": [
-                    "competitions"
-                ],
-                "responses": {
-                    "200": {
-                        "headers": {
-                            "location": {}
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Competitions"
-                                },
-                                "examples": {
-                                    "New changed full details": {
-                                        "value": [
-                                            "Meistrivõistlus",
-                                            "20.04.2023",
-                                            "Slaalom",
-                                            5,
-                                            "jama",
-                                            "Tartu",
-                                            "Bossworm"
-                                        ]
-                                    }
-                                }
-                            }
-                        },
-                        "description": "All good"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                }
-                            }
-                        },
-                        "description": "Not found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                }
-                            }
-                        },
-                        "description": "Server fucke dup"
-                    }
-                },
-                "operationId": "#184438658",
-                "summary": "Update competitions"
-            },
-            "delete": {
-                "tags": [
-                    "competitions"
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Deleted"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                },
-                                "examples": {
-                                    "Not found": {
-                                        "value": {
-                                            "error": "Entry not found"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Entry does not exist"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                },
-                                "examples": {
-                                    "Example": {
-                                        "value": {
-                                            "error": "Something went wrong on our side :/"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Server messed up"
-                    }
-                },
-                "operationId": "#184268390",
-                "summary": "Remove game"
-            },
-            "delete": {
-                "tags": [
-                    "competitions"
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Deleted"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                },
-                                "examples": {
-                                    "Not found": {
-                                        "value": {
-                                            "error": "Entry not found"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Entry does not exist"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                },
-                                "examples": {
-                                    "Example": {
-                                        "value": {
-                                            "error": "Something went wrong on our side :/"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Server messed up"
-                    }
-                },
-                "operationId": "#184268390",
-                "summary": "Remove game"
-            },
-            "put": {
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Competitions"
                             }
                         }
                     },

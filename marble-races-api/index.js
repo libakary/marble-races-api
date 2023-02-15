@@ -7,7 +7,7 @@ app.use(express.json())
 
 
 const swaggerUI = require("swagger-ui-express")
-const yamljs = require("yamljs")
+//const yamljs = require("yamljs")
 const swaggerDocument = require("./docs/swagger.json")
 //const swaggerDocument = require("./docs/swagger.yaml");
 
