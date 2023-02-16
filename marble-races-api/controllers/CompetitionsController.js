@@ -42,8 +42,12 @@ exports.updateById = async(req, res) =>{
     try {
       result = await Competition.update(req.body,{where: {id:req.params.id}})
     } catch (error) {
-      console.log("CompetitionsUpdate: ",error)
-      res.status(500).send({error:"Something went wrong on our side, sorry"})
+      if (error instanceof db.Sequelize.ForeignKeyConstraintError) {
+        res.status(400).send({error: `Table:$${error.table} Data violates uniqueness rule`})
+      } else {
+        console.log("CompetitionsUpdate: ",error)
+        res.status(500).send({error:"Something went wrong on our side, sorry"})
+      }
       return
     }
     if (result === 0) {

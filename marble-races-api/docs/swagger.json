@@ -480,6 +480,11 @@
                                         "value": {
                                             "error": "Parameters are missing"
                                         }
+                                    },
+                                    "NonUnique": {
+                                        "value": {
+                                            "error": "Data violates uniqueness rule"
+                                        }
                                     }
                                 }
                             }
