@@ -3,10 +3,411 @@
     "info": {
         "title": "Marble-Race-API",
         "version": "1.0.0",
-        "description": "### This is a Swagger UI for our Marble Race API  \n\n### Error handling\nErrors are presented using the HTTP status codes 400-599. The response include a more detailed explanation about the error in the body.\n\n```\n{\n  \"error\": \"Cleartext explanation of the error that occurred\"\n}\n```\n\n### Generic API errors\nThese error responses can be returned by any of the described endpoints.\n\n| HTTP status  |  Description |\n|---|---|\n| 400| Bad input parameters or invalid request. More information can be found in the response body.\n| 401| The consumer does not have access to the requested resource or the provided token is not valid.\n| 404| The requested resource can not be found or the user does not have access to the resource.\n| 5XX| A server error has occurred while processing the request."
+        "description": "### This is a Swagger UI for our Marble Race API"
     },
     "paths": {
-    
+        "/competitions": {
+            "get": {
+                "tags": [
+                    "competitions"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of Competitions": {
+                                        "value": [
+                                            "Võistlus",
+                                            "Meistrivõistlus"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of competitions"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "No nahka server error": {
+                                        "value": {
+                                            "error": "APPI KATKI"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Server error"
+                    }
+                },
+                "operationId": "#184267953",
+                "summary": "Get a list of all competitions",
+                "description": "Returns a list of all competitions in API"
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new competition to be created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Competitions"
+                            },
+                            "examples": {
+                                "Lisa andmed": {
+                                    "value": {
+                                        "competitionName": "some text",
+                                        "date": "2018-01-17",
+                                        "trackType": "some text",
+                                        "numberOfTeams": 79,
+                                        "registeredTeams": "some text",
+                                        "location": "some text",
+                                        "organizer": "some text"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "competitions"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Kõik korras"
+                    },
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Competitions"
+                                },
+                                "examples": {
+                                    "Example of entry": {
+                                        "value": {
+                                            "id": 74,
+                                            "competitionName": "some text",
+                                            "date": "2018-01-17",
+                                            "trackType": "some text",
+                                            "numberOfTeams": 62,
+                                            "registeredTeams": "some text",
+                                            "location": "some text",
+                                            "organizer": "some text"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Creates new entry with entered variables"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Missing parameters": {
+                                        "value": {
+                                            "error": "Parameters are missing"
+                                        }
+                                    },
+                                    "NonUnique": {
+                                        "value": {
+                                            "error": "Data violates uniqueness rule"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "One or all params are missing"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "ai ai server pekkis": {
+                                        "value": {
+                                            "error": "jama värk"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "sitt lugu"
+                    }
+                },
+                "operationId": "#184268298",
+                "summary": "Add competitions and add info on lines for competitions",
+                "description": "Create new competition, add variables\n"
+            }
+        },
+        "/competitions/{id}": {
+            "get": {
+                "tags": [
+                    "competitions"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "Full details of a given competition": {
+                                        "value": [
+                                            "Meistrivõistlus",
+                                            "20.04.2023",
+                                            "Slaalom",
+                                            5,
+                                            "jama",
+                                            "Tartu",
+                                            "Bossworm"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns full details of a given id competition"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Competition /w+ was not found": {
+                                        "value": {
+                                            "error": "Competition \\w+ was not found in competition array"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Competition was not found in competitions array"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "No pekki": {
+                                        "value": [
+                                            "L"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Server error"
+                    }
+                },
+                "operationId": "#184268001",
+                "summary": "Get full details of a competition",
+                "description": "Returns full details of a given id competition"
+            },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Competitions"
+                            },
+                            "examples": {
+                                "Edit this": {
+                                    "value": {
+                                        "competitionName": "some text",
+                                        "date": "2018-01-17",
+                                        "trackType": "some text",
+                                        "numberOfTeams": 23,
+                                        "registeredTeams": "some text",
+                                        "location": "some text",
+                                        "organizer": "some text"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "competitions"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Competitions"
+                                },
+                                "examples": {
+                                    "Updated data": {
+                                        "value": {
+                                            "id": 77,
+                                            "competitionName": "some text",
+                                            "date": "2018-01-17",
+                                            "trackType": "some text",
+                                            "numberOfTeams": 39,
+                                            "registeredTeams": "some text",
+                                            "location": "some text",
+                                            "organizer": "some text"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "All good"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Invalid data": {
+                                        "value": {
+                                            "error": "Invalid object data"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Invalid object data"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Id not found": {
+                                        "value": {
+                                            "error": "Id not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Server error": {
+                                        "value": {
+                                            "error": "Server error"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Server fucke dup"
+                    }
+                },
+                "operationId": "#184438658",
+                "summary": "Update competitions"
+            },
+            "delete": {
+                "tags": [
+                    "competitions"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "No permission": {
+                                        "value": {
+                                            "error": "No permission for this action"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "No permission"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Not found": {
+                                        "value": {
+                                            "error": "Entry not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Entry does not exist"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Example": {
+                                        "value": {
+                                            "error": "Something went wrong on our side :/"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Server messed up"
+                    }
+                },
+                "operationId": "#184268390",
+                "summary": "Delete competition"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
         "/teams": {
             "get": {
                 "tags": [
@@ -33,6 +434,23 @@
                             }
                         },
                         "description": "Returns a list of teams"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "kuidas sai nii halvasti minna": {
+                                        "value": {
+                                            "error": "some text"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "L"
                     }
                 },
                 "operationId": "#184268094",
@@ -110,6 +528,23 @@
                             }
                         },
                         "description": "One or all params are missing"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "L bozo": {
+                                        "value": {
+                                            "error": "some text"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "suht suur L"
                     }
                 },
                 "operationId": "#184268296",
@@ -389,373 +824,6 @@
                 }
             ]
         },
-        "/competitions": {
-            "get": {
-                "tags": [
-                    "competitions"
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                "examples": {
-                                    "List of Competitions": {
-                                        "value": "[\n    \"Võistlus\"\n    \"Meistrivõistlus\"\n    ]"
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Returns a list of competitions"
-                    }
-                },
-                "operationId": "#184267953",
-                "summary": "Get a list of all competitions",
-                "description": "Returns a list of all competitions in API"
-            },
-            "post": {
-                "requestBody": {
-                    "description": "A new competition to be created",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Competitions"
-                            },
-                            "examples": {
-                                "Lisa andmed": {
-                                    "value": {
-                                        "competitionName": "some text",
-                                        "date": "2018-01-17",
-                                        "trackType": "some text",
-                                        "numberOfTeams": 79,
-                                        "registeredTeams": "some text",
-                                        "location": "some text",
-                                        "organizer": "some text"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "tags": [
-                    "competitions"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Kõik korras"
-                    },
-                    "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Competitions"
-                                },
-                                "examples": {
-                                    "Example of entry": {
-                                        "value": {
-                                            "id": 74,
-                                            "competitionName": "some text",
-                                            "date": "2018-01-17",
-                                            "trackType": "some text",
-                                            "numberOfTeams": 62,
-                                            "registeredTeams": "some text",
-                                            "location": "some text",
-                                            "organizer": "some text"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Creates new entry with entered variables"
-                    },
-                    "400": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                },
-                                "examples": {
-                                    "Missing parameters": {
-                                        "value": {
-                                            "error": "Parameters are missing"
-                                        }
-                                    },
-                                    "NonUnique": {
-                                        "value": {
-                                            "error": "Data violates uniqueness rule"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "One or all params are missing"
-                    }
-                },
-                "operationId": "#184268298",
-                "summary": "Add competitions and add info on lines for competitions",
-                "description": "Create new competition, add variables\n"
-            }
-        },
-        "/competitions/{id}": {
-            "summary": "Get competition Details",
-            "description": "Get all the details of a competition with the given id",
-            "get": {
-                "tags": [
-                    "competitions"
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                "examples": {
-                                    "Full details of a given competition": {
-                                        "value": [
-                                            "Meistrivõistlus",
-                                            "20.04.2023",
-                                            "Slaalom",
-                                            5,
-                                            "jama",
-                                            "Tartu",
-                                            "Bossworm"
-                                        ]
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Returns full details of a given id competition"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                },
-                                "examples": {
-                                    "Competition /w+ was not found": {
-                                        "value": {
-                                            "error": "Competition \\w+ was not found in competition array"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Competition was not found in competitions array"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                },
-                                "examples": {
-                                    "No pekki": {
-                                        "value": [
-                                            "L"
-                                        ]
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Server error"
-                    }
-                },
-                "operationId": "#184268001",
-                "summary": "Get full details of a competition",
-                "description": "Returns full details of a given id competition"
-            },
-            "put": {
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Competitions"
-                            },
-                            "examples": {
-                                "Edit this": {
-                                    "value": {
-                                        "competitionName": "some text",
-                                        "date": "2018-01-17",
-                                        "trackType": "some text",
-                                        "numberOfTeams": 23,
-                                        "registeredTeams": "some text",
-                                        "location": "some text",
-                                        "organizer": "some text"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "tags": [
-                    "competitions"
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Competitions"
-                                },
-                                "examples": {
-                                    "Updated data": {
-                                        "value": {
-                                            "id": 77,
-                                            "competitionName": "some text",
-                                            "date": "2018-01-17",
-                                            "trackType": "some text",
-                                            "numberOfTeams": 39,
-                                            "registeredTeams": "some text",
-                                            "location": "some text",
-                                            "organizer": "some text"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "All good"
-                    },
-                    "400": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                },
-                                "examples": {
-                                    "Invalid data": {
-                                        "value": {
-                                            "error": "Invalid object data"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Invalid object data"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                },
-                                "examples": {
-                                    "Id not found": {
-                                        "value": {
-                                            "error": "Id not found"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Not found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                },
-                                "examples": {
-                                    "Server error": {
-                                        "value": {
-                                            "error": "Server error"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Server fucke dup"
-                    }
-                },
-                "operationId": "#184438658",
-                "summary": "Update competitions"
-            },
-            "delete": {
-                "tags": [
-                    "competitions"
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Deleted"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                },
-                                "examples": {
-                                    "No permission": {
-                                        "value": {
-                                            "error": "No permission for this action"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "No permission"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                },
-                                "examples": {
-                                    "Not found": {
-                                        "value": {
-                                            "error": "Entry not found"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Entry does not exist"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                },
-                                "examples": {
-                                    "Example": {
-                                        "value": {
-                                            "error": "Something went wrong on our side :/"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Server messed up"
-                    }
-                },
-                "operationId": "#184268390",
-                "summary": "Delete competition"
-            },
-            "parameters": [
-                {
-                    "name": "id",
-                    "schema": {
-                        "type": "integer"
-                    },
-                    "in": "path",
-                    "required": true
-                }
-            ]
-        },
         "/signUps": {
             "get": {
                 "responses": {
@@ -776,6 +844,23 @@
                             }
                         },
                         "description": "Returns a list of signups"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "skill issue": {
+                                        "value": {
+                                            "error": "some text"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "pekki läks"
                     }
                 },
                 "summary": "Get a list of all Signups",
@@ -799,8 +884,7 @@
                 }
             },
             "Teams": {
-                "title": "Root Type for Teams",
-                "description": "Team details",
+                "description": "",
                 "required": [
                     "teamName",
                     "nrOfTeammates",
@@ -840,7 +924,6 @@
                 }
             },
             "Competitions": {
-                "title": "Root Type for Competitions",
                 "description": "Competition details",
                 "required": [
                     "competitionName",
