@@ -42,6 +42,23 @@
             "post": {
                 "requestBody": {
                     "description": "A new team to be created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Teams"
+                            },
+                            "examples": {
+                                "Muuda andmeid": {
+                                    "value": {
+                                        "teamName": "some text",
+                                        "nrOfTeammates": 41,
+                                        "teamLeader": "some text",
+                                        "country": "some text"
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "required": true
                 },
                 "tags": [
@@ -59,12 +76,13 @@
                                 },
                                 "examples": {
                                     "Team data": {
-                                        "value": [
-                                            "Yellow Mellow",
-                                            5,
-                                            "Mellow",
-                                            "Italy"
-                                        ]
+                                        "value": {
+                                            "id": 93,
+                                            "teamName": "some text",
+                                            "nrOfTeammates": 11,
+                                            "teamLeader": "some text",
+                                            "country": "some text"
+                                        }
                                     }
                                 }
                             }
@@ -97,7 +115,7 @@
         "/teams/{id}": {
             "get": {
                 "tags": [
-                    "details"
+                    "teams"
                 ],
                 "parameters": [
                     {
@@ -185,8 +203,7 @@
                                         "teamName": "some text",
                                         "nrOfTeammates": 70,
                                         "teamLeader": "some text",
-                                        "country": "some text",
-                                        "jama": "some text"
+                                        "country": "some text"
                                     }
                                 }
                             }
@@ -196,6 +213,16 @@
                 },
                 "tags": [
                     "teams"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -389,6 +416,26 @@
             "post": {
                 "requestBody": {
                     "description": "A new competition to be created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Competitions"
+                            },
+                            "examples": {
+                                "Lisa andmed": {
+                                    "value": {
+                                        "competitionName": "some text",
+                                        "date": "2018-01-17",
+                                        "trackType": "some text",
+                                        "numberOfTeams": 79,
+                                        "registeredTeams": "some text",
+                                        "location": "some text",
+                                        "organizer": "some text"
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "required": true
                 },
                 "tags": [
@@ -406,15 +453,16 @@
                                 },
                                 "examples": {
                                     "Example of entry": {
-                                        "value": [
-                                            "Meistrivõistlus",
-                                            "20.04.2023",
-                                            "Slaalom",
-                                            5,
-                                            "jama",
-                                            "Tartu",
-                                            "Bossworm"
-                                        ]
+                                        "value": {
+                                            "id": 74,
+                                            "competitionName": "some text",
+                                            "date": "2018-01-17",
+                                            "trackType": "some text",
+                                            "numberOfTeams": 62,
+                                            "registeredTeams": "some text",
+                                            "location": "some text",
+                                            "organizer": "some text"
+                                        }
                                     }
                                 }
                             }
@@ -553,15 +601,16 @@
                                 },
                                 "examples": {
                                     "Updated data": {
-                                        "value": [
-                                            "Meistrivõistlus",
-                                            "20.04.2023",
-                                            "Slaalom",
-                                            5,
-                                            "jama",
-                                            "Tartu",
-                                            "Bossworm"
-                                        ]
+                                        "value": {
+                                            "id": 77,
+                                            "competitionName": "some text",
+                                            "date": "2018-01-17",
+                                            "trackType": "some text",
+                                            "numberOfTeams": 39,
+                                            "registeredTeams": "some text",
+                                            "location": "some text",
+                                            "organizer": "some text"
+                                        }
                                     }
                                 }
                             }
@@ -720,7 +769,6 @@
                     "teamName",
                     "nrOfTeammates",
                     "country",
-                    "id",
                     "teamLeader"
                 ],
                 "type": "object",
@@ -745,10 +793,6 @@
                     "country": {
                         "description": "",
                         "type": "string"
-                    },
-                    "jama": {
-                        "description": "",
-                        "type": "string"
                     }
                 },
                 "example": {
@@ -756,8 +800,7 @@
                     "teamName": "some text",
                     "nrOfTeammates": 34,
                     "teamLeader": "some text",
-                    "country": "some text",
-                    "jama": "some text"
+                    "country": "some text"
                 }
             },
             "Competition": {
@@ -770,8 +813,7 @@
                     "numberOfTeams",
                     "registeredTeams",
                     "location",
-                    "organizer",
-                    "id"
+                    "organizer"
                 ],
                 "type": "object",
                 "properties": {

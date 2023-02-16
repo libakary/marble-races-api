@@ -17,10 +17,6 @@ module.exports = (sequilize, Sequilize) => {
             type: Sequilize.STRING,
             allowNull: false,
         },
-        jama: {
-            type: Sequilize.STRING,
-            allowNull: false,
-        },
         country: {
             type: Sequilize.STRING,
             allowNull: false

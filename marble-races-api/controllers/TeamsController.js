@@ -2,7 +2,7 @@ const {db} = require('../db.js')
 const Team = db.teams
 
 exports.getAll = async(req, res)=>{
-    const teams = await Team.findAll({attributes:["teamName"]})
+    const teams = await Team.findAll({attributes:["id", "teamName"]})
     res.send(teams)
 }
 
@@ -16,16 +16,15 @@ exports.getById = async(req, res)=>{
 }
 
 exports.createNew = async(req, res)=>{
-    const teams = await Team.create(req.body)
     let team
   try {
     team = await Team.create(req.body)
   } catch (error) {
     if (error instanceof db.Sequelize.ValidationError) {
-        res.status(400).send({"error":error.errors.map((item)=> item.message)})
+        res.status(400).send({error:error.errors.map((item)=> item.message)})
     } else {
       console.log("TeamsCreate: ",error)
-      res.status(500).send({"error":"Something went wrong on our side. Sorry :("})
+      res.status(500).send({error:"Something went wrong on our side. Sorry :("})
     }
     return
   }
@@ -39,10 +38,10 @@ exports.createNew = async(req, res)=>{
 exports.deleteById = async(req, res) =>{
   let result
   try {
-    const result = await Team.destroy({where: {id:req.params.id}})
+    result = await Team.destroy({where: {id:req.params.id}})
   } catch (error) {
     console.log("TeamsDelete: ",error)
-    res.status(500).send({"error":"Something went wrong"})
+    res.status(500).send({error:"Something went wrong"})
     return
   }
   if (result === 0) {
@@ -57,17 +56,17 @@ exports.updateById = async(req, res) =>{
   let result
   delete req.body.id
   try {
-    const result = await Team.update(req.body,{where: {id:req.params.id}})
+    result = await Team.update(req.body,{where: {id:req.params.id}})
   } catch (error) {
     console.log("TeamsUpdate: ",error)
-    res.status(500).send({"error":"Something went wrong"})
+    res.status(500).send({error:"Something went wrong"})
     return
   }
   if (result === 0) {
     res.status(404).send({error: "Game not found"})
     return
   }
-  const teams = await Team.findByPk(req.params.id)
+  const team = await Team.findByPk(req.params.id)
   res.status(200)
     .location(`${getBaseUrl(req)}/teams/${team.id}`)//.send({error:"no content"})
     .json(team)
@@ -75,7 +74,7 @@ exports.updateById = async(req, res) =>{
 
 getBaseUrl = (request) => {
   return (
-    (/*request.connection &&*/ request?.connection?.encrypted ? "https" : "http") +
+    (request.connection && request.connection.encrypted ? "https" : "http") +
     `://${request.headers.host}`
   )
 }
