@@ -58,12 +58,8 @@ exports.updateById = async(req, res) =>{
   try {
     result = await Team.update(req.body,{where: {id:req.params.id}})
   } catch (error) {
-    if (error instanceof db.Sequelize.ForeignKeyConstraintError) {
-      res.status(400).send({error: `Table:$${error.table} Data violates uniqueness rule`})
-    } else {
     console.log("TeamsUpdate: ",error)
     res.status(500).send({error:"Something went wrong"})
-    }
     return
   }
   if (result === 0) {

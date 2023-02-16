@@ -7,7 +7,8 @@ module.exports = (sequilize, Sequilize) => {
         },
         competitionName: {
             type: Sequilize.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         date: {
             type: Sequilize.DATE,
