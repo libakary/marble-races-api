@@ -178,6 +178,17 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/Teams"
+                            },
+                            "examples": {
+                                "Edit this": {
+                                    "value": {
+                                        "teamName": "some text",
+                                        "nrOfTeammates": 70,
+                                        "teamLeader": "some text",
+                                        "country": "some text",
+                                        "jama": "some text"
+                                    }
+                                }
                             }
                         }
                     },
@@ -512,6 +523,19 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/Competitions"
+                            },
+                            "examples": {
+                                "Edit this": {
+                                    "value": {
+                                        "competitionName": "some text",
+                                        "date": "2018-01-17",
+                                        "trackType": "some text",
+                                        "numberOfTeams": 23,
+                                        "registeredTeams": "some text",
+                                        "location": "some text",
+                                        "organizer": "some text"
+                                    }
+                                }
                             }
                         }
                     },
@@ -691,12 +715,13 @@
             },
             "Teams": {
                 "title": "Root Type for Teams",
-                "description": "Teams details",
+                "description": "",
                 "required": [
                     "teamName",
                     "nrOfTeammates",
+                    "country",
                     "id",
-                    "country"
+                    "teamLeader"
                 ],
                 "type": "object",
                 "properties": {
@@ -707,10 +732,7 @@
                     },
                     "teamName": {
                         "description": "",
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
+                        "type": "string"
                     },
                     "nrOfTeammates": {
                         "description": "",
@@ -730,7 +752,7 @@
                     }
                 },
                 "example": {
-                    "id": 55,
+                    "id": 1,
                     "teamName": "some text",
                     "nrOfTeammates": 34,
                     "teamLeader": "some text",
@@ -745,49 +767,58 @@
                     "competitionName",
                     "date",
                     "trackType",
-                    "numberOfteams",
+                    "numberOfTeams",
                     "registeredTeams",
                     "location",
-                    "organizer"
+                    "organizer",
+                    "id"
                 ],
                 "type": "object",
                 "properties": {
                     "id": {
-                        "format": "int32",
-                        "type": "integer"
+                        "description": "",
+                        "type": "integer",
+                        "readOnly": true
                     },
                     "competitionName": {
+                        "description": "",
                         "type": "string"
                     },
                     "date": {
                         "format": "date",
+                        "description": "",
                         "type": "string"
                     },
                     "trackType": {
+                        "description": "",
                         "type": "string"
                     },
                     "numberOfTeams": {
+                        "description": "",
                         "type": "integer"
                     },
                     "registeredTeams": {
+                        "description": "",
                         "type": "string"
                     },
                     "location": {
+                        "description": "",
                         "type": "string"
                     },
                     "organizer": {
+                        "description": "",
                         "type": "string"
                     }
                 },
                 "example": {
-                    "competitionName": "Meistrivõistlus",
+                    "id": 2,
+                    "competitionName": "Eaaas",
                     "date": "2022-02-06",
                     "trackType": "Slaalom",
                     "numberOfTeams": 5,
                     "registeredTeams": "jama",
                     "location": "Tartu",
                     "organizer": "Bossworm"
-
                 }
             }
         }
