@@ -1,4 +1,6 @@
 const {db} = require('../db.js')
+const Competition = db.competitions
+const SignUps = db.signUps
 const Team = db.teams
 
 exports.getAll = async(req, res)=>{
@@ -7,7 +9,16 @@ exports.getAll = async(req, res)=>{
 }
 
 exports.getById = async(req, res)=>{
-    const teams = await Team.findByPk(req.params.id)
+    const teams = await Team.findByPk(req.params.id, {
+      include:{
+        model: SignUps,
+        attributes:["id"],
+        include: {
+          model: Competition,
+          attributes:["id", "competitionName", "date"]
+        }
+      }
+    })
     if (teams === null) {
         res.status(404).send({error:"Team Not found!"})
         return

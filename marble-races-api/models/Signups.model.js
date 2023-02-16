@@ -28,5 +28,6 @@ module.exports = (sequelize, Sequelize, Team, Competition) => {
     Signups.belongsTo(Team)
     Competition.hasMany(Signups)
     Signups.belongsTo(Competition)
+    
     return Signups
 }

@@ -56,5 +56,5 @@ module.exports = (sequilize, Sequilize) => {
             } 
         }
     })
-return Competition
+    return Competition
 }

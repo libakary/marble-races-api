@@ -1,17 +1,29 @@
 const {db} = require('../db.js');
 const Competition = db.competitions
+const SignUps = db.signUps
+const Team = db.teams
 
 exports.getAll = async(req, res)=>{
-    const competitions = await Competition.findAll({attributes:["id", "competitionName"]})
+    const competitions = await Competition.findAll({
+      attributes:["id", "competitionName"]})
     res.send(competitions)
 }
 
 exports.getById = async (req,res)=> {
-    const competitions = await Competition.findByPk(req.params.id)
+    const competitions = await Competition.findByPk(req.params.id, {
+      include:{
+        model: SignUps,
+        attributes:["id"],
+        include: {
+          model: Team,
+          attributes:["id", "teamName", "teamLeader"]
+        }
+      }
+    })
 
     if (competitions == null) {
         res.status(404).send({error:"Competition not Found"})
-        return;
+        return
     }
     
     res.send(competitions)

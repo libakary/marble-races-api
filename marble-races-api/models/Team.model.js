@@ -35,5 +35,5 @@ module.exports = (sequilize, Sequilize) => {
             } 
         }
     })
-return Team
+    return Team
 }
