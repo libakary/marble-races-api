@@ -63,7 +63,7 @@ exports.updateById = async(req, res) =>{
     return
   }
   if (result === 0) {
-    res.status(404).send({error: "Game not found"})
+    res.status(404).send({error: "Team not found"})
     return
   }
   const team = await Team.findByPk(req.params.id)
