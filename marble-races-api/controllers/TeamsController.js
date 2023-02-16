@@ -59,14 +59,18 @@ exports.updateById = async(req, res) =>{
     result = await Team.update(req.body,{where: {id:req.params.id}})
   } catch (error) {
     console.log("TeamsUpdate: ",error)
-    res.status(500).send({error:"Something went wrong"})
+    res.status(500).send({error:"Something went wrong on our side, sorry :("})
     return
   }
-  if (result === 0) {
+  if (result === null) {
     res.status(404).send({error: "Team not found"})
     return
   }
   const team = await Team.findByPk(req.params.id)
+  if (team === null) {
+    res.status(404).send({error: "Team not found"})
+    return
+  }
   res.status(200)
     .location(`${getBaseUrl(req)}/teams/${team.id}`)//.send({error:"no content"})
     .json(team)

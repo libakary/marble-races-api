@@ -1,1 +1,0 @@
-// vaata vene rühma projektist järele mis see tegema peaks

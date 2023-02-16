@@ -1,5 +1,6 @@
 const teamsController = require('../controllers/TeamsController.js');
 const competitionsController = require('../controllers/CompetitionsController.js');
+const signUpsController = require('../controllers/Signups.Controller.js');
 
 module.exports = (app) => {
     app.route("/teams")
@@ -17,4 +18,7 @@ module.exports = (app) => {
         .get(competitionsController.getById) //read
         .put(competitionsController.updateById)
         .delete(competitionsController.deleteById);
+
+    app.route("/signUps")
+        .get(signUpsController.getAll)
 }

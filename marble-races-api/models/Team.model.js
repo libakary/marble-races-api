@@ -9,22 +9,30 @@ module.exports = (sequilize, Sequilize) => {
             type: Sequilize.STRING,
             allowNull: false,
             unique: true,
-            notEmpty: true
+            validate:{
+                notEmpty: true
+            }  
         },
         nrOfTeammates: {
             type: Sequilize.INTEGER,
             allowNull: false,
-            notEmpty: true
+            validate:{
+                notEmpty: true
+            } 
         },
         teamLeader: {
             type: Sequilize.STRING,
             allowNull: false,
-            notEmpty: true
+            validate:{
+                notEmpty: true
+            } 
         },
         country: {
             type: Sequilize.STRING,
             allowNull: false,
-            notEmpty: true
+            validate:{
+                notEmpty: true
+            } 
         }
     })
 return Team

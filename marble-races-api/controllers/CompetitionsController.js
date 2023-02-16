@@ -46,11 +46,15 @@ exports.updateById = async(req, res) =>{
         res.status(500).send({error:"Something went wrong on our side, sorry"})
       return
     }
-    if (result === 0) {
+    if (result === null) {
       res.status(404).send({error: "Competition not found"})
       return
     }
     const competition = await Competition.findByPk(req.params.id)
+    if (competition === null) {
+      res.status(404).send({error: "Competition not found"})
+      return
+    }
     res.status(200)
         .location(`${getBaseUrl(req)}/competitions/${competition.id}`)
         .json(competition)

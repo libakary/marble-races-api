@@ -100,6 +100,11 @@
                                         "value": {
                                             "error": "Parameters are missing"
                                         }
+                                    },
+                                    "NonUnique": {
+                                        "value": {
+                                            "error": "Data violates uniqueness rule"
+                                        }
                                     }
                                 }
                             }
@@ -750,6 +755,32 @@
                     "required": true
                 }
             ]
+        },
+        "/signUps": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "List of signups": {
+                                        "value": [
+                                            "Võistlus",
+                                            "Mellow Yellow"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of signups"
+                    }
+                },
+                "summary": "Get a list of all Signups",
+                "description": "Returns a list of all signups in API"
+            }
         }
     },
     "components": {
@@ -769,7 +800,7 @@
             },
             "Teams": {
                 "title": "Root Type for Teams",
-                "description": "",
+                "description": "Team details",
                 "required": [
                     "teamName",
                     "nrOfTeammates",
@@ -808,8 +839,8 @@
                     "country": "some text"
                 }
             },
-            "Competition": {
-                "title": "Root Type for Competition",
+            "Competitions": {
+                "title": "Root Type for Competitions",
                 "description": "Competition details",
                 "required": [
                     "competitionName",

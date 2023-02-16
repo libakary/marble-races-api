@@ -9,37 +9,51 @@ module.exports = (sequilize, Sequilize) => {
             type: Sequilize.STRING,
             allowNull: false,
             unique: true,
-            notEmpty: true
+            validate:{
+                notEmpty: true
+            } 
         },
         date: {
             type: Sequilize.DATE,
             allowNull: false,
-            notEmpty: true
+            validate:{
+                notEmpty: true
+            } 
         },
         trackType: {
             type: Sequilize.STRING,
             allowNull: false,
-            notEmpty: true
+            validate:{
+                notEmpty: true
+            } 
         },
         numberOfTeams: {
             type: Sequilize.INTEGER,
             allowNull: false,
-            notEmpty: true
+            validate:{
+                notEmpty: true
+            } 
         },
         registeredTeams: {
             type: Sequilize.STRING,
             allowNull: false,
-            notEmpty: true
+            validate:{
+                notEmpty: true
+            } 
         },
         location: {
             type: Sequilize.STRING,
             allowNull: false,
-            notEmpty: true
+            validate:{
+                notEmpty: true
+            } 
         },
         organizer: {
             type: Sequilize.STRING,
             allowNull: false,
-            notEmpty: true
+            validate:{
+                notEmpty: true
+            } 
         }
     })
 return Competition
