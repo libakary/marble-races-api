@@ -6,29 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning VU3</title>
     <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        html, body { height: 100%;}
+        body { display: grid; place-items: center;}
+        .text-green { color: green;}
+        .text-red { color: red;}
+    </style>
 </head>
 <body>
     <div id="app">
-        <p>
-            <input type="text" v-model="greeting">
-        </p>
-        <p>
-        {{ greeting }} ({{ greeting.length}})
-        </p>
+        <!-- <button v-bind:class="buttonClasses">Click Me</button> -->
+        <button :class="active ? 'text-red' : 'text-green'" v-on:click="toggle">Click Me</button>
     </div>
 
     <script>
-        Vue.createApp({
+        Vue.createApp( {
             data() {
                 return {
-                    greeting: 'Hello World'
+                    //buttonClasses: 'text-green'
+                    active: false
+                };
+            },
+            methods: {
+                toggle() {
+                    //alert('toggle');
+                    //this.buttonClasses = 'text-red';
+                    this.active = ! this.active;
                 }
-            },
-            mounted() {
-                setTimeout(()=> {
-                    this.greeting = 'Changed'
-                }, 3000)
-            },
+            }
         }).mount('#app')
     </script>
     
