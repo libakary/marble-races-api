@@ -2,6 +2,7 @@
 export default {
   props: {
     show: Boolean,
+    competitions: Object,
   },
 };
 </script>

@@ -1,6 +1,13 @@
 <template>
   <div>
-    <table border="1">
+  <table-template
+  caption="Kõik võistlused" 
+  :items="competitions" 
+  :showControls="true" 
+  @show="competitionDetailId = $event.id">
+  
+  </table-template>
+    <!-- <table border="1">
       <caption>
         Kõik võistlused
       </caption>
@@ -11,12 +18,12 @@
         <td>{{ competition.competitionName }}</td>
         <td><button @click="$event=> competitionDetailId = competition.id">Kuva Detailid</button></td>
       </tr>
-    </table>
+    </table> -->
   </div>
 
   <Teleport to="body">
     <!-- use the modal component, pass in the prop -->
-    <modal :show="showModal" @close="showModal = false">
+    <modal :show="competitionDetailId != 0" @close="competitionDetailId = 0">
       <template #header>
         <h3>Võistluse üksikasjad</h3>
       </template>
@@ -35,16 +42,18 @@
 
 <script>
   import Modal from './components/Modal.vue';
+  import TableTemplate from './components/Table.vue';
+
   export default {
     components: {
       Modal,
+      TableTemplate,
     },
     data() {
       return {
         competitions: [
           
         ],
-        showModal: false,
         competitionDetailId: 0,
         currentCompetition: {
           id: 0, 
@@ -64,10 +73,10 @@
     },
     watch: {
       async competitionDetailId(newId) {
+        if (newId == 0) return;
         this.currentCompetition = await (
           await fetch(`http://localhost:8090/competitions/${newId}`)
         ).json();
-        this.showModal = true;
       },
     }
   };
