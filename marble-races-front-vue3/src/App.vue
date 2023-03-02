@@ -11,7 +11,7 @@
   </div>
   <Teleport to="body">
     <!-- use the modal component, pass in the prop -->
-    <modal :show="showModal" @close="showModal = false">
+    <modal :show="teamDetailId !=0" @close="teamDetailId = 0">
       <template #header>
         <h3>Tiimi üksikasjad</h3>
       </template>
@@ -43,7 +43,6 @@ export default {
   data() {
     return {
       teams:[],
-      showModal: false,
       teamDetailId: 0,
       currentTeam: {
         id: 0, 
@@ -59,10 +58,10 @@ export default {
   },
   watch: {
     async teamDetailId (newId) {
+      if (newId ==0) return;
       this.currentTeam=await (
         await fetch(`http://localhost:8090/teams/${newId}`)
       ).json();
-      this.showModal=true;
     },
   },
 };
