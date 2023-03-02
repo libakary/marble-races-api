@@ -1,24 +1,77 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div>
+    <table border="1">
+      <caption>
+        Kõik võistlused
+      </caption>
+      <tr>
+        <th>Nimi</th>
+      </tr>
+      <tr v-for="competition in competitions" :key="competition.id">
+        <td>{{ competition.competitionName }}</td>
+        <td><button @click="$event=> competitionDetailId = competition.id">Kuva Detailid</button></td>
+      </tr>
+    </table>
+  </div>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <Teleport to="body">
+    <!-- use the modal component, pass in the prop -->
+    <modal :show="showModal" @close="showModal = false">
+      <template #header>
+        <h3>Võistluse üksikasjad</h3>
+      </template>
+      <template #body>
+        <b>Nimi: </b>{{ currentCompetition.competitionName }}<br/>
+        <b>Kuupäev: </b>{{ currentCompetition.date }}<br/>
+        <b>Raja tüüp: </b>{{ currentCompetition.trackType }}<br/>
+        <b>Võistkondade arv: </b>{{ currentCompetition.numberOfTeams }}<br/>
+        <b>Registreeritud Võistkonnad: </b>{{ currentCompetition.registeredTeams }}<br/>
+        <b>Asukoht: </b>{{ currentCompetition.location }}<br/>
+        <b>Organiseerija: </b>{{ currentCompetition.organizer }}<br/>
+      </template>
+    </modal>
+  </Teleport>
 </template>
+
+<script>
+  import Modal from './components/Modal.vue';
+  export default {
+    components: {
+      Modal,
+    },
+    data() {
+      return {
+        competitions: [
+          
+        ],
+        showModal: false,
+        competitionDetailId: 0,
+        currentCompetition: {
+          id: 0, 
+          competitionName: "", 
+          datedate: "", 
+          trackType: "", 
+          numberOfTeams: 0, 
+          registeredTeams: "", 
+          location: "", 
+          organizer: "", 
+          signups: [],
+        },
+      };
+    },
+    async created() {
+      this.competitions = await (await fetch("http://localhost:8090/competitions")).json();
+    },
+    watch: {
+      async competitionDetailId(newId) {
+        this.currentCompetition = await (
+          await fetch(`http://localhost:8090/competitions/${newId}`)
+        ).json();
+        this.showModal = true;
+      },
+    }
+  };
+</script>
 
 <style scoped>
 header {
