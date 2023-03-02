@@ -2,9 +2,10 @@ require("dotenv").config()
 const express = require("express")
 const app = express()
 const port = process.env.APP_PORT
+const cors = require("cors")
 
 app.use(express.json())
-
+app.use(cors())
 
 const swaggerUI = require("swagger-ui-express")
 //const yamljs = require("yamljs")

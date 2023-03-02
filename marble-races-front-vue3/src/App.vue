@@ -1,24 +1,75 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+<template>
+  <div>
+    <table border="1">
+      <caption>
+        kõik tiimid
+      </caption>
+      <tr>
+        <th>Nimi</th>
+      </tr>
+      <tr v-for="team in teams" :key="team.id">
+        <td>{{ team.teamName }}</td>
+        <td><button @click="teamDetailId = team.id">Kuva detailid</button></td>
+      </tr>
+    </table>
+  </div>
+  <Teleport to="body">
+    <!-- use the modal component, pass in the prop -->
+    <modal :show="showModal" @close="showModal = false">
+      <template #header>
+        <h3>Tiimi üksikasjad</h3>
+      </template>
+      <template #body>
+      <b>Nimi: </b>{{ currentTeam.teamName }}<br/>
+      <b>Inimeste arv: </b>{{ currentTeam.nrOfTeammates }}<br/>
+      <b>Tiimi pealik: </b>{{ currentTeam.teamLeader }}<br/>
+      <b>Maa: </b>{{ currentTeam.country }}<br/>
+      </template>
+      <!-- <template #footer>
+        <button
+              class="modal-default-button"
+              @click="$emit('close')"
+            >OK</button>
+      </template> -->
+    </modal>
+  </Teleport>
+</template>
+
+<script>
+import Modal from './components/Modal.vue'
+
+export default {
+  components: {
+    Modal,
+  },
+  data() {
+    return {
+      teams:[],
+      showModal: false,
+      teamDetailId: 0,
+      currentTeam: {
+        id: 0, 
+        teamName:"", 
+        nrOfTeammates: 0,
+        teamLeader:"",
+        country:"",
+      },
+    };
+  },
+  async created() {
+    this.teams=await (await fetch("http://localhost:8090/teams")).json();
+  },
+  watch: {
+    async teamDetailId (newId) {
+      this.currentTeam=await (
+        await fetch(`http://localhost:8090/teams/${newId}`)
+      ).json();
+      this.showModal=true;
+    },
+  },
+};
 </script>
 
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
-</template>
 
 <style scoped>
 header {
