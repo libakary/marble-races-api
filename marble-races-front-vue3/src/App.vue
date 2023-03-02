@@ -1,17 +1,13 @@
 <template>
   <div>
-    <table border="1">
-      <caption>
-        kõik tiimid
-      </caption>
-      <tr>
-        <th>Nimi</th>
-      </tr>
-      <tr v-for="team in teams" :key="team.id">
-        <td>{{ team.teamName }}</td>
-        <td><button @click="teamDetailId = team.id">Kuva detailid</button></td>
-      </tr>
-    </table>
+
+    <table-template 
+      caption="Kõik tiimid" 
+      :items="teams" 
+      :showControls="true" 
+      @show="teamDeatilId=$event">
+
+    </table-template>
   </div>
   <Teleport to="body">
     <!-- use the modal component, pass in the prop -->
@@ -37,10 +33,12 @@
 
 <script>
 import Modal from './components/Modal.vue'
+import TableTemplate from "./components/Table.vue";
 
 export default {
   components: {
     Modal,
+    TableTemplate,
   },
   data() {
     return {
