@@ -9,8 +9,10 @@
 
     </table-template>
   </div>
-  <Teleport to="body">
-    <!-- use the modal component, pass in the prop -->
+  <team-details :teamDeatilId="teamDetailId" 
+  @close="teamDetailId = 0"></team-details>
+  <!-- <Teleport to="body">
+    -use the modal component, pass in the prop-
     <modal :show="teamDetailId !=0" @close="teamDetailId = 0">
       <template #header>
         <h3>Tiimi üksikasjad</h3>
@@ -21,48 +23,35 @@
       <b>Tiimi pealik: </b>{{ currentTeam.teamLeader }}<br/>
       <b>Maa: </b>{{ currentTeam.country }}<br/>
       </template>
-      <!-- <template #footer>
+      <template #footer>
         <button
               class="modal-default-button"
               @click="$emit('close')"
             >OK</button>
-      </template> -->
+      </template>
     </modal>
-  </Teleport>
+  </Teleport> -->
 </template>
 
 <script>
-import Modal from './components/Modal.vue'
+//import Modal from './components/Modal.vue'
 import TableTemplate from "./components/Table.vue";
+import TeamDetails from "./components/TeamDetails.vue";
 
 export default {
   components: {
-    Modal,
+    //Modal,
     TableTemplate,
+    TeamDetails,
   },
   data() {
     return {
       teams:[],
       teamDetailId: 0,
-      currentTeam: {
-        id: 0, 
-        teamName:"", 
-        nrOfTeammates: 0,
-        teamLeader:"",
-        country:"",
-      },
     };
   },
   async created() {
     this.teams=await (await fetch("http://localhost:8090/teams")).json();
-  },
-  watch: {
-    async teamDetailId (newId) {
-      if (newId ==0) return;
-      this.currentTeam=await (
-        await fetch(`http://localhost:8090/teams/${newId}`)
-      ).json();
-    },
   },
 };
 </script>
