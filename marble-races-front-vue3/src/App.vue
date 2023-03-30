@@ -1,15 +1,5 @@
 <template>
-  <div>
-  <table-template
-  caption="Kõik võistlused" 
-  :items="competitions" 
-  :showControls="true" 
-  @show="competitionDetailId = $event">
-  
-  </table-template>
-  </div>
-  <competition-details :competitionDetailId="competitionDetailId"
-  @close="competitionDetailId = 0"></competition-details>
+
 </template>
 
 <script>

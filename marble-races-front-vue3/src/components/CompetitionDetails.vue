@@ -30,9 +30,7 @@ export default {
             required: true,
         },
     },
-    emits: {
-
-    },
+    emits: ["close"],
     data() {
         return {
             currentCompetition: {
@@ -57,6 +55,7 @@ export default {
             this.currentCompetition = await (
             await fetch(`http://localhost:8090/competitions/${this.competitionDetailId}`)
             ).json();
+            console.log(this.currentCompetition);
       },
     }
 }
