@@ -6,7 +6,7 @@
             }} 
         </caption>
         <tr>
-            <th v-for="(keyName, index) in Object.keys(items[0])" :key="index">
+            <th v-for="(keyName, index) in keyNames" :key="index">
                 {{ keyName }}
             </th>
             <th v-if="showControls"></th>

@@ -15,8 +15,8 @@
   </template>
   
   <script>
-    import TableTemplate from './components/Table.vue';
-    import CompetitionDetails from "./components/CompetitionDetails.vue";
+    import TableTemplate from '../components/Table.vue';
+    import CompetitionDetails from "../components/CompetitionDetails.vue";
   
     export default {
       components: {
