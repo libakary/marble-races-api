@@ -28,9 +28,7 @@
                 required: true,
             },
         },
-        emits: {
-            
-        },
+        emits: ["close"],
         data(){
             return {
                 currentTeam: {
@@ -44,13 +42,14 @@
         },
         beforeUpdate() {
             if (this.teamDetailId == 0) return;
-            this.getDetails()
+            this.getDetails();
         },
         methods: {
             async getDetails () {
                 this.currentTeam=await (
                     await fetch(`http://localhost:8090/teams/${this.teamDetailId}`)
                 ).json();
+                console.log(this.currentTeam);
             },
         },
     };

@@ -1,61 +1,27 @@
-<template>
-  <div>
-
-    <table-template 
-      caption="Kõik tiimid" 
-      :items="teams" 
-      :showControls="true" 
-      @show="teamDeatilId=$event">
-
-    </table-template>
-  </div>
-  <team-details :teamDeatilId="teamDetailId" 
-  @close="teamDetailId = 0"></team-details>
-  <!-- <Teleport to="body">
-    -use the modal component, pass in the prop-
-    <modal :show="teamDetailId !=0" @close="teamDetailId = 0">
-      <template #header>
-        <h3>Tiimi üksikasjad</h3>
-      </template>
-      <template #body>
-      <b>Nimi: </b>{{ currentTeam.teamName }}<br/>
-      <b>Inimeste arv: </b>{{ currentTeam.nrOfTeammates }}<br/>
-      <b>Tiimi pealik: </b>{{ currentTeam.teamLeader }}<br/>
-      <b>Maa: </b>{{ currentTeam.country }}<br/>
-      </template>
-      <template #footer>
-        <button
-              class="modal-default-button"
-              @click="$emit('close')"
-            >OK</button>
-      </template>
-    </modal>
-  </Teleport> -->
-</template>
-
-<script>
-//import Modal from './components/Modal.vue'
-import TableTemplate from "./components/Table.vue";
-import TeamDetails from "./components/TeamDetails.vue";
-
-export default {
-  components: {
-    //Modal,
-    TableTemplate,
-    TeamDetails,
-  },
-  data() {
-    return {
-      teams:[],
-      teamDetailId: 0,
-    };
-  },
-  async created() {
-    this.teams=await (await fetch("http://localhost:8090/teams")).json();
-  },
-};
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
 </script>
 
+<template>
+  <header>
+    <img 
+      alt="Vue logo" 
+      class="logo" 
+      src="@/assets/logo.svg" 
+      width="125" 
+      height="125" />
+
+    <div class="wrapper">
+
+      <nav>
+        <RouterLink to="/">All teams</RouterLink>
+        <RouterLink to="/about">About</RouterLink>
+      </nav>
+    </div>
+  </header>
+
+  <RouterView />
+</template>
 
 <style scoped>
 header {
