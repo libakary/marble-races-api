@@ -1,12 +1,13 @@
 <template>
     <div>
-    <table-template
-    caption="Kõik võistlused" 
-    :items="competitions" 
-    :showControls="true" 
-    @show="competitionDetailId = $event.id">
+      <router-link to="/addCompetition">Lisa uus võistlus</router-link>
+      <table-template
+        caption="Kõik võistlused" 
+        :items="competitions" 
+        :showControls="true" 
+        @show="competitionDetailId = $event.id">
     
-    </table-template>
+      </table-template>
     </div>
     <competition-details 
       :competitionDetailId="competitionDetailId"
@@ -15,13 +16,14 @@
   </template>
   
   <script>
-    import TableTemplate from '../components/Table.vue';
-    import CompetitionDetails from "../components/CompetitionDetails.vue";
-  
+    import TableTemplate from '../../components/Table.vue';
+    import CompetitionDetails from "../../components/CompetitionDetails.vue";
+    import { RouterLink } from 'vue-router'
     export default {
       components: {
         TableTemplate,
         CompetitionDetails,
+        RouterLink,
       },
       data() {
         return {
