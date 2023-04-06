@@ -1,6 +1,6 @@
 <template>
     <div>
-  
+      <router-link to="/addTeam">Registreeri tiim</router-link>
       <table-template 
         caption="Kõik tiimid" 
         :items="teams" 
@@ -36,14 +36,16 @@
   </template>
   
   <script>
-  import TableTemplate from "../components/Table.vue";
-  import TeamDetails from "../components/TeamDetails.vue";
+  import TableTemplate from "../../components/Table.vue";
+  import TeamDetails from "../../components/TeamDetails.vue";
+  import { RouterLink } from "vue-router";
   
   export default {
     components: {
       //Modal,
       TableTemplate,
       TeamDetails,
+      RouterLink,
     },
     data() {
       return {

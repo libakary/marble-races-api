@@ -9,7 +9,7 @@
         <b>Nimi: </b>{{ currentTeam.teamName }}<br/>
         <b>Inimeste arv: </b>{{ currentTeam.nrOfTeammates }}<br/>
         <b>Tiimi pealik: </b>{{ currentTeam.teamLeader }}<br/>
-        <b>Maa: </b>{{ currentTeam.country }}<br/>
+        <b>Riik: </b>{{ currentTeam.country }}<br/>
       </template>
     </modal>
   </Teleport>
