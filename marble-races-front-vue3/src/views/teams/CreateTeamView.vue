@@ -38,7 +38,13 @@
                     <label for="country">Riik</label>
                 </div>
                 <div class="col-75">
-                    <input id="country" type="text" v-model="country" />
+                    <input id="country" type="text" v-model="country" required />
+                    <select v-model="country">
+                        <option disabled value="">Vali riik</option>
+                        <option v-for="item in countries" :key="item.id" :value="item.country">
+                            {{item.country}}
+                        </option>
+                    </select>
                 </div>
             </div>
 
@@ -60,7 +66,12 @@ export default {
             nrOfTeammates: 0,
             teamLeader: "",
             country: "",
+            countries: [],
         }
+    },
+    async created() {
+        this.countries = await(await fetch("http://localhost:8090/countries")).json()
+        this.countries = [...new Set(this.countries.map(item => item.country))]
     },
     methods: {
         formSubmitHandler (){

@@ -1,3 +1,4 @@
+const { Sequelize } = require('sequelize')
 const {db} = require('../db.js')
 const Competition = db.competitions
 const SignUps = db.signUps
@@ -92,6 +93,15 @@ getBaseUrl = (request) => {
     (request.connection && request.connection.encrypted ? "https" : "http") +
     `://${request.headers.host}`
   )
+}
+
+exports.getCountries = async(req, res) => {
+  const teams = await Team.findAll({
+    attributes: ["id", "country"]
+    //[Sequelize.fn("distinct", Sequelize.col("country")),"country"]]})
+    //"country"], distinct: true, col:"country"})
+    })
+  res.send(teams)
 }
 
 /////////////////////////
