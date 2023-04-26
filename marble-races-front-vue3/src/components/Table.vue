@@ -14,15 +14,16 @@
         </tr>
         <tr v-for="item in items" :key="item.id">
             <td v-for="(keyName, index) in Object.keys(item)" :key="index">
-            {{ item[keyName] }}
+                {{ item[keyName] }}
             </td>
-            <td v-if="showControls">
+            <td>
                 <button @click="$emit('show', item)">Näita</button>
             </td>
             <slot name="additionalColumns"></slot>
         </tr>
     </table>
 </template>
+
 <script>
     export default {
         props: {

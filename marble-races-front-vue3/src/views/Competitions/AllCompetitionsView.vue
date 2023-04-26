@@ -19,6 +19,7 @@
     import TableTemplate from '../../components/Table.vue';
     import CompetitionDetails from "../../components/CompetitionDetails.vue";
     import { RouterLink } from 'vue-router'
+    
     export default {
       components: {
         TableTemplate,

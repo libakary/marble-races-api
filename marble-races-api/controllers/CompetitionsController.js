@@ -1,3 +1,4 @@
+const { Sequelize } = require('sequelize')
 const {db} = require('../db.js');
 const Competition = db.competitions
 const SignUps = db.signUps
@@ -21,7 +22,7 @@ exports.getById = async (req,res)=> {
       }
     })
 
-    if (competitions == null) {
+    if (competitions === null) {
         res.status(404).send({error:"Competition not Found"})
         return
     }
@@ -94,4 +95,14 @@ getBaseUrl = (request) => {
         (request.connection && request.connection.encrypted ? "https" : "http") +
         `://${request.headers.host}`
     )
+}
+
+/* kas seda on vaja??? mida see teeb/kas pean selle competitions jaoks ümber tegema? */
+exports.getTrackTypes = async(req, res) => {
+  const competitions = await Competition.findAll({
+    attributes: ["id", "trackType"]
+    //[Sequelize.fn("distinct", Sequelize.col("trackType")),"trackType"]]})
+    //"trackType"], distinct: true, col:"trackType"})
+    })
+  res.send(competitions)
 }

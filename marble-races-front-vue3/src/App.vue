@@ -12,7 +12,6 @@ import { RouterLink, RouterView } from 'vue-router'
     />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
 
       <nav>
         <RouterLink to="/">All competitions</RouterLink>

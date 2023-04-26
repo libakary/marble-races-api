@@ -21,4 +21,7 @@ module.exports = (app) => {
 
     app.route("/signUps")
         .get(signUpsController.getAll)
+
+    app.route("/trackTypes")
+        .get(teamsController.getTrackTypes) //read
 }

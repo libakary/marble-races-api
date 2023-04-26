@@ -1,14 +1,14 @@
 <template>
     <div class="container">
         <div v-if="error">
-            <span v-for="(message, index) in error" :key="index">
+            <span v-for="message, index in error" :key="index">
                 {{ message }}<br />
             </span>
         </div>
         <form @submit.prevent="formSubmitHandler">
         <div class="row">
             <div class="col-25">
-                <label for="competitionName">Nimi</label>
+                <label for="competitionName">Võistluse Nimi</label>
             </div>
             <div class="col-75">
                 <input id="competitionName" v-model="competitionName" type="text" required/>
@@ -28,6 +28,14 @@
             </div>
             <div class="col-75">
                 <input id="trackType" v-model="trackType" type="text" required/>
+                <select v-model="trackType">
+                    <option disabled value="">Vali raja tüüp</option>
+                    <!--<option value="Slaalom">Slaalom</option>-->
+                    <option v-for="item in trackTypes" :key="item.id" :value="item.trackType">
+                        {{item.trackType}}
+                    </option>
+                    <!--<option value="Sprint">Sprint</option>-->
+                </select>
             </div>
         </div>
         <div class="row">
@@ -44,6 +52,7 @@
             </div>
             <div class="col-75">
                 <textarea id="registeredTeams" v-model="registeredTeams" type="text" required></textarea>
+                <!-- siia teha ka dropdown?-->
             </div>
         </div>
         <div class="row">
@@ -75,15 +84,22 @@ export default {
     data() {
         return {
             error: "",
-            competitionName: "T", 
+            competitionName: "Test", 
             date: "2023-04-06", 
-            trackType: "T", 
-            numberOfTeams: 1, 
-            registeredTeams: "T", 
-            location: "T", 
-            organizer: "T", 
-            signups: ["T","T"],
-        }
+            trackType: "Test raja tüüp", 
+            trackTypes: [],
+            numberOfTeams: 0, 
+            registeredTeams: "Test tiimid", 
+            location: "Test asukoht", 
+            organizer: "Test organiseerija", 
+            signups: [],
+
+        };
+    },
+    async created() {
+        this.trackTypes = await (await fetch("http://localhost:8090/trackTypes")).json()
+        this.trackTypes = [...new Set(this.trackTypes.map(item => item.trackType))]
+
     },
     methods: {
         formSubmitHandler() {
@@ -108,14 +124,24 @@ export default {
                     this.$router.push("/");
                     return;
                 }
+                //alert(data.error);
                 this.error = data.error;
                 
             })
             .catch((error)=>{
                 console.log(error);
             });
+             //console.log(event);
+            //alert("Registreeritud!")
         },
-    }
+        /* async checkResponseStatus(response){
+            if(response.ok) return response;
+            throw new Error(
+                `${response.status} ${response.statusText} ${await response.text()}`
+            ); */
+        //},
+    
+    },
 }
 </script>
 

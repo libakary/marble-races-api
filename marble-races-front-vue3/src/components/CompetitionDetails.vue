@@ -53,7 +53,7 @@ export default {
     methods: {
         async getDetails() {
             this.currentCompetition = await (
-            await fetch(`http://localhost:8090/competitions/${this.competitionDetailId}`)
+                await fetch(`http://localhost:8090/competitions/${this.competitionDetailId}`)
             ).json();
             console.log(this.currentCompetition);
       },
@@ -62,5 +62,7 @@ export default {
 </script>
 
 <style>
-
+.modal-container {
+  width: 700px;
+}
 </style>
