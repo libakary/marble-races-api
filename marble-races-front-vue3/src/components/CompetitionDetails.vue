@@ -20,6 +20,7 @@
 
 <script>
 import Modal from "./Modal.vue";
+import useDateFormating from "../composables/useDateFormating.js"
 export default {
     components: {
         Modal,
@@ -56,7 +57,10 @@ export default {
                 await fetch(`http://localhost:8090/competitions/${this.competitionDetailId}`)
             ).json();
             console.log(this.currentCompetition);
-      },
+        },
+        formatDate(dateString) {
+            return useDateFormating(dateString)
+        }
     }
 }
 </script>
