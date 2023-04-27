@@ -5,7 +5,9 @@
         caption="Kõik tiimid" 
         :items="teams" 
         :showControls="true" 
-        @show="teamDetailId=$event.id">
+        @show="teamDetailId=$event.id"
+        @delete="teamToDelete = $event"
+        >
   
       </table-template>
     </div>
@@ -13,6 +15,18 @@
       :teamDetailId="teamDetailId" 
       @close="teamDetailId = 0"
     ></team-details>
+    <modal :show="JSON.stringify(teamToDelete) !== '{}'">
+      <template #header>
+        <h3>Tiimi kustutamine</h3>
+      </template>
+      <template #body>
+      <p>u sure about that?</p>
+      </template>
+      <template #footer>
+      <button class="modal-default-button" @click="deleteTeam()">Jah</button>
+      <button class="modal-default-button" @click="teamToDelete = {}">Ei</button>
+      </template>
+    </modal>
     <!-- <Teleport to="body">
       -use the modal component, pass in the prop-
       <modal :show="teamDetailId !=0" @close="teamDetailId = 0">
@@ -33,28 +47,48 @@
         </template>
       </modal>
     </Teleport> -->
+  
   </template>
   
   <script>
   import TableTemplate from "../../components/Table.vue";
   import TeamDetails from "../../components/TeamDetails.vue";
+  import Modal from "../../components/Modal.vue";
   import { RouterLink } from "vue-router";
   
   export default {
     components: {
-      //Modal,
       TableTemplate,
       TeamDetails,
       RouterLink,
+      Modal,
     },
     data() {
       return {
-        teams:[],
+        teams: [],
         teamDetailId: 0,
+        teamToDelete: {},
       };
     },
     async created() {
       this.teams=await (await fetch("http://localhost:8090/teams")).json();
+    },
+    methods: {
+      async deleteTeam() {
+        fetch("http://localhost:8090/teams/"+ this.teamToDelete.id, {
+          method: "delete",
+        }).then(async (response) => {
+          if (response.status == 204) {
+            console.log("DELETED");
+            this.teams.splice(this.teams.indexOf(this.teamToDelete), 1);
+            this.teamToDelete = {};
+          } else {
+            console.log("RESPONSE:", response);
+            const data = await response.json();
+            console.log("DELETE: ",data);
+          }
+        });
+      },
     },
   };
   </script>
