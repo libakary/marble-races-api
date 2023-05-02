@@ -97,15 +97,15 @@ getBaseUrl = (request) => {
 
 exports.getCountries = async(req, res) => {
   const teams = await Team.findAll({
-    attributes: ["id", "country"],
+    attributes: ["country"],
     //[Sequelize.fn("distinct", Sequelize.col("country")),"country"]]})
     //"country"], distinct: true, col:"country"})
     order:[
-      ["Italy"]
+      ["country"]
     ]
     })
-    console.log(teams);
-  res.send(new Set(teams.map(team =>team.country)))
+    console.log(teams.map(team =>team.country));
+  res.send([... new Set(teams.map(team =>team.country))])
 }
 
 /////////////////////////
