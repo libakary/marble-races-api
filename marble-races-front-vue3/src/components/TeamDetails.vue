@@ -47,7 +47,7 @@
         methods: {
             async getDetails () {
                 this.currentTeam=await (
-                    await fetch(`http://localhost:8090/teams/${this.teamDetailId}`)
+                    await fetch(`${import.meta.env.VITE_API_URL}/teams/${this.teamDetailId}`)
                 ).json();
                 console.log(this.currentTeam);
             },

@@ -41,8 +41,8 @@
                     <input id="country" type="text" v-model="country" required />
                     <select v-model="country">
                         <option disabled value="">Vali riik</option>
-                        <option v-for="item in countries" :key="item.id" :value="item.country">
-                            {{item.country}}
+                        <option v-for="country,index in countries" :key="index" :value="country">
+                            {{country}}
                         </option>
                     </select>
                 </div>
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-const API_URL ="http://localhost:8090/teams";
+const API_URL =import.meta.env.VITE_API_URL+"/teams";
 export default {
     data() {
         return {
@@ -70,8 +70,7 @@ export default {
         }
     },
     async created() {
-        this.countries = await(await fetch("http://localhost:8090/countries")).json()
-        this.countries = [...new Set(this.countries.map(item => item.country))]
+        this.countries = await(await fetch(import.meta.env.VITE_API_URL+"/countries")).json()        
     },
     methods: {
         formSubmitHandler (){

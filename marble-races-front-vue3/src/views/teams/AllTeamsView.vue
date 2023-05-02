@@ -71,11 +71,12 @@
       };
     },
     async created() {
-      this.teams=await (await fetch("http://localhost:8090/teams")).json();
+      
+      this.teams=await (await fetch(import.meta.env.VITE_API_URL+"/teams")).json();
     },
     methods: {
       async deleteTeam() {
-        fetch("http://localhost:8090/teams/"+ this.teamToDelete.id, {
+        fetch(import.meta.env.VITE_API_URL+"/teams/"+ this.teamToDelete.id, {
           method: "delete",
         }).then(async (response) => {
           if (response.status == 204) {
