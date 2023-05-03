@@ -27,6 +27,7 @@
         <button class="modal-default-button" @click="competitionToDelete = {}">Ei</button>
       </template>
     </modal>
+
   </template>
   
   <script>
@@ -50,17 +51,17 @@
           
         };
       },
-      async created() {
-        this.competitions = await (await fetch("http://localhost:8090/competitions")).json();
+      async created() { 
+        this.competitions = await (await fetch(import.meta.env.VITE_API_URL+"/competitions")).json();
       },
       methods: {
-        async deleteCompetition(competition) {
-          fetch("http://localhost:8090/competitions"+ competition.id, {
+        async deleteCompetition() {
+          fetch(import.meta.env.VITE_API_URL+"/competitions"+ this.competitionToDelete.id, {
             method: "delete",
           }).then(async (response) => {
             if(response.status == 204){
               console.log("DELETED");
-              this.competitions.splice(this.competitions.indexOf(competition), 1);
+              this.competitions.splice(this.competitions.indexOf(this.competitionToDelete), 1);
               this.competitionToDelete = {};
             } else {
               console.log("RESPONSE:", response);

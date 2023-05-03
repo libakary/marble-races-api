@@ -11,7 +11,7 @@
                 <label for="competitionName">Võistluse Nimi</label>
             </div>
             <div class="col-75">
-                <input id="competitionName" v-model="competitionName" type="text" required/>
+                <input id="competitionName" type="text" v-model="competitionName" required/>
             </div>
         </div>
         <div class="row">
@@ -19,14 +19,15 @@
                 <label for="date">Kuupäev</label>
             </div>
             <div class="col-75">
-                <input id="date" v-model="date" type="date" required/>
+                <input id="date" type="date" v-model="date" required/>
             </div>
         </div>    
-<!--         <div class="row">
-            <div class="col-25">
-                <label for="trackType">Raja tüüp</label>
+
+        <div class="row">
+           <div class="col-25">
+                <label for="trackType">Rajatüüp</label>
             </div>
-            <div class="col-75">
+            <!--  <div class="col-75">
                 <input id="trackType" v-model="trackType" type="text" required/>
                 <select v-model="trackType">
                     <option disabled value="">Vali raja tüüp</option>-->
@@ -38,14 +39,15 @@
                 <!--</select>
             </div>
         </div> -->
-
-        <div class="col-75">
-          <input type="text" v-model="trackType" list="trackType" required />
-          <datalist id="trackType">
-            <option v-for="item in trackTypes" :key="item" :value="item">
-              {{ item }}
-            </option>
-          </datalist>
+            <div class="col-75">
+                <input id="trackType" type="text" v-model="trackType" required />
+                <select v-model="trackType">
+                    <option disabled value="">Vali rajatüüp</option>
+                    <option v-for="trackType, index in trackTypes" :key="index" :value="trackType">
+                    {{ trackType }}
+                    </option>
+                </select>
+            </div>
         </div>
 
         <div class="row">
@@ -89,25 +91,25 @@
     </div>
 </template>
 <script>
-const API_URL = "http://localhost:8090/competitions";
+const API_URL =import.meta.env.VITE_API_URL+"/competitions";
 export default {
     data() {
         return {
             error: "",
-            competitionName: "Test", 
-            date: "2023-04-06", 
-            trackType: "Test raja tüüp", 
+            competitionName: "", 
+            date: "0000-00-00", 
+            trackType: "", 
             trackTypes: [],
             numberOfTeams: 0, 
-            registeredTeams: "Test tiimid", 
-            location: "Test asukoht", 
-            organizer: "Test organiseerija", 
+            registeredTeams: "", 
+            location: "", 
+            organizer: "", 
             signups: [],
 
         };
     },
     async created() {
-        this.trackTypes = await (await fetch("http://localhost:8090/trackTypes")).json()
+        this.trackTypes = await (await fetch(import.meta.env.VITE_API_URL+"/trackTypes")).json()
         //this.trackTypes = [...new Set(this.trackTypes.map(item => item.trackType))]
 
     },

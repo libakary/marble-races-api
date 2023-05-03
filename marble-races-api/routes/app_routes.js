@@ -13,14 +13,14 @@ module.exports = (app) => {
 
     app.route("/competitions")
         .get(competitionsController.getAll)
-        .post(competitionsController.createNew);
+        .post(competitionsController.createNew);    //create
     app.route("/competitions/:id")
-        .get(competitionsController.getById) //read
-        .put(competitionsController.updateById)
-        .delete(competitionsController.deleteById);
+        .get(competitionsController.getById)        //read
+        .put(competitionsController.updateById)     //update
+        .delete(competitionsController.deleteById); //delete
 
     app.route("/signUps")
-        .get(signUpsController.getAll)
+        .get(signUpsController.getAll);
 
     app.route("/trackTypes")
         .get(teamsController.getTrackTypes) //read

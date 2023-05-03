@@ -20,7 +20,7 @@
 
 <script>
 import Modal from "./Modal.vue";
-import useDateFormating from "./composables/useDateFormating.js"
+import useDateFormating from "./useDateFormating.js"
 export default {
     components: {
         Modal,
@@ -54,7 +54,7 @@ export default {
     methods: {
         async getDetails() {
             this.currentCompetition = await (
-                await fetch(`http://localhost:8090/competitions/${this.competitionDetailId}`)
+                await fetch(`${import.meta.env.VITE_API_URL}/competitions/${this.competitionDetailId}`)
             ).json();
             console.log(this.currentCompetition);
         },
