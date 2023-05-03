@@ -5,7 +5,9 @@
         caption="Kõik võistlused" 
         :items="competitions" 
         :showControls="true" 
-        @show="competitionDetailId = $event.id">
+        @show="competitionDetailId = $event.id"
+        @delete="competitionToDelete = $event"
+      >
     
       </table-template>
     </div>
@@ -13,28 +15,61 @@
       :competitionDetailId="competitionDetailId"
       @close="competitionDetailId = 0"
     ></competition-details>
+    <modal :show="JSON.stringify(competitionToDelete) !== '{}'">
+      <template #header>
+        <h3>Võistluse Kustutamine</h3>
+      </template>
+      <template #body>
+        <p>Oled kindel, et soovid kustutada seda mängu?</p>
+      </template>
+      <template #footer>
+        <button class="modal-default-button" @click="deleteCompetition()">Jah</button>
+        <button class="modal-default-button" @click="competitionToDelete = {}">Ei</button>
+      </template>
+    </modal>
   </template>
   
   <script>
     import TableTemplate from '../../components/Table.vue';
     import CompetitionDetails from "../../components/CompetitionDetails.vue";
-    import { RouterLink } from 'vue-router'
+    import Modal from "../../components/Modal.vue";
+    import { RouterLink } from 'vue-router';
     
     export default {
       components: {
         TableTemplate,
         CompetitionDetails,
         RouterLink,
+        Modal,
       },
       data() {
         return {
           competitions: [],
           competitionDetailId: 0,
+          competitionToDelete: {},
           
         };
       },
       async created() {
         this.competitions = await (await fetch("http://localhost:8090/competitions")).json();
+      },
+      methods: {
+        async deleteCompetition(competition) {
+          fetch("http://localhost:8090/competitions"+ competition.id, {
+            method: "delete",
+          }).then(async (response) => {
+            if(response.status == 204){
+              console.log("DELETED");
+              this.competitions.splice(this.competitions.indexOf(competition), 1);
+              this.competitionToDelete = {};
+            } else {
+              console.log("RESPONSE:", response);
+              const data = await response.json();
+              console.log("DELETE: ", data);
+            }
+
+          });
+        }
       },
     };
   </script>

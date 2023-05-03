@@ -18,6 +18,7 @@
             </td>
             <td>
                 <button @click="$emit('show', item)">Näita</button>
+                <button @click="$emit('delete', item)">Kustuta</button>
             </td>
             <slot name="additionalColumns"></slot>
         </tr>

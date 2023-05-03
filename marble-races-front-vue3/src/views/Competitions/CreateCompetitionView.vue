@@ -22,22 +22,32 @@
                 <input id="date" v-model="date" type="date" required/>
             </div>
         </div>    
-        <div class="row">
+<!--         <div class="row">
             <div class="col-25">
                 <label for="trackType">Raja tüüp</label>
             </div>
             <div class="col-75">
                 <input id="trackType" v-model="trackType" type="text" required/>
                 <select v-model="trackType">
-                    <option disabled value="">Vali raja tüüp</option>
+                    <option disabled value="">Vali raja tüüp</option>-->
                     <!--<option value="Slaalom">Slaalom</option>-->
-                    <option v-for="item in trackTypes" :key="item.id" :value="item.trackType">
+                    <!--<option v-for="item in trackTypes" :key="item.id" :value="item.trackType">
                         {{item.trackType}}
-                    </option>
+                    </option>-->
                     <!--<option value="Sprint">Sprint</option>-->
-                </select>
+                <!--</select>
             </div>
+        </div> -->
+
+        <div class="col-75">
+          <input type="text" v-model="trackType" list="trackType" required />
+          <datalist id="trackType">
+            <option v-for="item in trackTypes" :key="item" :value="item">
+              {{ item }}
+            </option>
+          </datalist>
         </div>
+
         <div class="row">
             <div class="col-25">
                 <label for="numberOfTeams">Võistkondade arv</label>
@@ -98,7 +108,7 @@ export default {
     },
     async created() {
         this.trackTypes = await (await fetch("http://localhost:8090/trackTypes")).json()
-        this.trackTypes = [...new Set(this.trackTypes.map(item => item.trackType))]
+        //this.trackTypes = [...new Set(this.trackTypes.map(item => item.trackType))]
 
     },
     methods: {

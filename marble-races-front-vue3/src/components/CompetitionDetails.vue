@@ -20,7 +20,7 @@
 
 <script>
 import Modal from "./Modal.vue";
-import useDateFormating from "../composables/useDateFormating.js"
+import useDateFormating from "./composables/useDateFormating.js"
 export default {
     components: {
         Modal,
