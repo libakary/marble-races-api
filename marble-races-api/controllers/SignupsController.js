@@ -1,18 +1,19 @@
 // vaata vene rühma projektist järele mis see tegema peaks
 const {db} = require('../db.js');
-const SignUps = db.signUps
+const signUps = db.signUps
 const Competition = db.competitions
 const Team = db.teams
 
 exports.getAll = async (req,res) => {
-    const signUps = await SignUps.findAll({
-        include: { all: true },
+    const SignUps = await signUps.findAll({
+        include: [Competition, Team],
         logging: console.log
     })
-    console.log(signUps);
+    console.log(SignUps);
     let result = []
-    result = signUps.map( (gp) => { 
+    result = SignUps.map( (gp) => { 
         return {
+          "id":gp.id,
             "teamName":gp.team.teamName,
             "competitionName": `${gp.competition.competitionName}`
         }
@@ -20,9 +21,9 @@ exports.getAll = async (req,res) => {
     res.send(result)
 }
 exports.createNew = async(req, res)=>{
-    let signUps
+    let SignUps
   try {
-    signUps = await SignUps.create(req.body)
+    SignUps = await signUps.create(req.body)
   } catch (error) {
     if (error instanceof db.Sequelize.ValidationError) {
         res.status(400).send({error:error.errors.map((item)=> item.message)})
@@ -39,16 +40,16 @@ exports.createNew = async(req, res)=>{
 
     res
     .status(201)
-    .location(`${getBaseUrl(req)}/signups/${signups.id}`)
-    .json(signUps)
+    .location(`${getBaseUrl(req)}/signups/${SignUps.id}`)
+    .json(SignUps)
 }
 
 exports.deleteById = async(req, res) =>{
   let result
   try {
-    result = await Signups.destroy({where: {id:req.params.id}})
+    result = await signUps.destroy({where: {id:req.params.id}})
   } catch (error) {
-    console.log("SignUpsDelete: ",error)
+    console.log("signUpsDelete: ",error)
     res.status(500).send({error:"Something went wrong"})
     return
   }

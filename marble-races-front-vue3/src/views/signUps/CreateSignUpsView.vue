@@ -12,10 +12,10 @@
                 </div>
                 <div class="col-75">
                  
-                    <select v-model="team">
+                    <select v-model="teamId">
                         <option disabled value="">Vali tiim</option>
-                        <option v-for="team,index in teams" :key="index" :value="team">
-                            {{signups}}
+                        <option v-for="team,index in teams" :key="index" :value="team.id">
+                            {{team.teamName}}
                         </option>
                     </select>
                 </div>
@@ -27,10 +27,10 @@
                 </div>
                 <div class="col-75">
                    
-                    <select v-model="competition">
+                    <select v-model="competitionId">
                         <option disabled value="">Vali võistlus</option>
-                        <option v-for="competition,index in competitions" :key="index" :value="competition">
-                            {{signups}}
+                        <option v-for="competition,index in competitions" :key="index" :value="competition.id">
+                            {{competition.competitionName}}
                         </option>
                     </select>
                 </div>
@@ -50,7 +50,10 @@ export default {
     data() {
         return {
             error:"",
-            signupss: [],
+            teams: [],
+            competitions: [],
+            teamId: 0,
+            competitionId: 0,  
         };
     },
     async created() {
