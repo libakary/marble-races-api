@@ -1,6 +1,7 @@
 <template>
     <div>
       <router-link to="/addTeam">Registreeri tiim</router-link>
+      <router-link to="/addSignUp">Registreeri signup</router-link>
       <table-template 
         caption="Kõik tiimid" 
         :items="teams" 
@@ -11,6 +12,7 @@
   
       </table-template>
     </div>
+
     <team-details
       :teamDetailId="teamDetailId" 
       @close="teamDetailId = 0"
