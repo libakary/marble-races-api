@@ -75,7 +75,7 @@ export default {
             .then((response)=>response.json())
             .then((data)=>{
                 if (!data.error) {
-                    this.$router.push("/");
+                    this.$router.push("/signups");
                     return;
                 }
                 //alert(data.error);

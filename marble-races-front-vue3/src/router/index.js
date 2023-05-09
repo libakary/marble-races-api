@@ -4,13 +4,13 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
+      path: '/teams',
+      name: 'teams',
       component: () => import("../views/teams/AllTeamsView.vue")
     },
     {
-      path: '/1',
-      name: 'home1',
+      path: '/signups',
+      name: 'signups',
       component: () => import("../views/signUps/AllSignUpsView.vue")
     },
     {
@@ -22,8 +22,9 @@ const router = createRouter({
       path: '/addSignUp',
       name: 'addSignUp',
       component: () => import("../views/signUps/CreateSignUpsView.vue")
+    },
     {
-      path: '/competitions', <!--------------------------------------siin võib midagi mitte nii toredat juhtuda-->
+      path: '/competitions', 
       name: 'competitions',
       component: () => import("../views/Competitions/AllCompetitionsView.vue"),
     },

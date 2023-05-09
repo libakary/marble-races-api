@@ -33,6 +33,6 @@ module.exports = (app) => {
         .get(signUpsController.getAll);
 
     app.route("/trackTypes")
-        .get(teamsController.getTrackTypes) //read
+        .get(competitionsController.getTrackTypes) //read
 
 }

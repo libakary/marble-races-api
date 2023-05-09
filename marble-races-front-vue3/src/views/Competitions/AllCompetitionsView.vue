@@ -1,6 +1,7 @@
 <template>
     <div>
-      <router-link to="/addCompetition">Lisa uus võistlus</router-link>
+      <router-link to="/addCompetition">Lisa uus võistlus</router-link><br/>
+      <router-link to="/addSignUp">Registreeri signup</router-link><br/>
       <table-template
         caption="Kõik võistlused" 
         :items="competitions" 
@@ -55,23 +56,22 @@
         this.competitions = await (await fetch(import.meta.env.VITE_API_URL+"/competitions")).json();
       },
       methods: {
-        async deleteCompetition() {
-          fetch(import.meta.env.VITE_API_URL+"/competitions"+ this.competitionToDelete.id, {
-            method: "delete",
-          }).then(async (response) => {
-            if(response.status == 204){
-              console.log("DELETED");
-              this.competitions.splice(this.competitions.indexOf(this.competitionToDelete), 1);
-              this.competitionToDelete = {};
-            } else {
-              console.log("RESPONSE:", response);
-              const data = await response.json();
-              console.log("DELETE: ", data);
-            }
-
-          });
-        }
+      async deleteCompetition() {
+        fetch(import.meta.env.VITE_API_URL+"/competitions/"+ this.competitionToDelete.id, {
+          method: "delete",
+        }).then(async (response) => {
+          if (response.status == 204) {
+            console.log("DELETED");
+            this.competitions.splice(this.competitions.indexOf(this.competitionToDelete), 1);
+            this.competitionToDelete = {};
+          } else {
+            console.log("RESPONSE:", response);
+            const data = await response.json();
+            console.log("DELETE: ",data);
+          }
+        });
       },
+    },
     };
   </script>
   

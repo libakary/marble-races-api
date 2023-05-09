@@ -1,54 +1,57 @@
 <template>
     <Teleport to="body">
     <!-- use the modal component, pass in the prop -->
-    <modal :show="signupDetailId !=0" @close="$emit('close')">
+    <modal :show="signupDetailId != 0" @close="$emit('close')">
       <template #header>
-        <h3>Signupi üksikasjad</h3>
+        <h3>Signup üksikasjad</h3>
       </template>
       <template #body>
-        <b>Tiimi id: </b>{{ currentSignup.teamId }}<br/>
-        <b>Võistluse id: </b>{{ currentSignup.competitionId }}<br/>
+        <b>Tiimi nimi: </b>{{ currentSignup.teamName }}<br/>
+        <b>Võistluse nimi: </b>{{ currentSignup.competitionName }}<br/>
       </template>
     </modal>
   </Teleport>
 </template>
 
-
 <script>
-    import Modal from "./Modal.vue"
-    export default {
-        components: {
-            Modal,
+import Modal from "./Modal.vue";
+import useDateFormating from "./useDateFormating.js"
+export default {
+    components: {
+        Modal,
+    },
+    props: {
+        signupDetailId: {
+            type: Number,
+            required: true,
         },
-        props: {
-            signupDetailId: {
-                type: Number,
-                required: true,
+    },
+    emits: ["close"],
+    data() {
+        return {
+            currentSIgnup: {
+                id: 0, 
+                competitionName: "", 
+                teamName: "", 
             },
+        };
+    },
+    beforeUpdate() {
+        if (this.signupDetailId == 0) return;
+        this.getDetails()
+    },
+    methods: {
+        async getDetails() {
+            this.currentSignup = await (
+                await fetch(`${import.meta.env.VITE_API_URL}/signups/${this.signupDetailId}`)
+            ).json();
+            console.log(this.currentSignup);
         },
-        emits: ["close"],
-        data(){
-            return {
-                currentSignup: {
-                    id: 0, 
-                    teamId:0, 
-                    competitionId: 0,
-                },
-            };
-        },
-        beforeUpdate() {
-            if (this.signupDetailId == 0) return;
-            this.getDetails();
-        },
-        methods: {
-            async getDetails () {
-                this.currentSignup=await (
-                    await fetch(`${import.meta.env.VITE_API_URL}/signups/${this.signupDetailId}`)
-                ).json();
-                console.log(this.currentSignup);
-            },
-        },
-    };
+        formatDate(dateString) {
+            return useDateFormating(dateString)
+        }
+    }
+}
 </script>
 
 <style>

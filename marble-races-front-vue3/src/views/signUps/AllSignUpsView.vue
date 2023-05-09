@@ -6,7 +6,7 @@
         caption="Kõik signupid" 
         :items="signups" 
         :showControls="true" 
-        
+        @show="signupDetailId = $event.id"
         @delete="signupToDelete = $event"
         >
   
@@ -33,7 +33,6 @@
       </template>
     </modal>
    <!-- <Teleport to="body">
-      -use the modal component, pass in the prop-
       <modal :show="signupDetailId !=0" @close="signupDetailId = 0">
         <template #header>
           <h3>Signupi üksikasjad</h3>
@@ -84,7 +83,7 @@
         }).then(async (response) => {
           if (response.status == 204) {
             console.log("DELETED");
-            this.signUps.splice(this.singups.indexOf(this.signupToDelete), 1);
+            this.signups.splice(this.signups.indexOf(this.signupToDelete), 1);
             this.signupToDelete = {};
           } else {
             console.log("RESPONSE:", response);
