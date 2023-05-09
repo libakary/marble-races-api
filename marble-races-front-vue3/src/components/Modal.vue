@@ -1,10 +1,9 @@
 <script>
-
 export default {
   props: {
     show: Boolean,
     team: Object,
-
+    competitions: Object,
   }
 }
 </script>
@@ -64,6 +63,7 @@ export default {
 
 .modal-body {
   margin: 20px 0;
+  color: green;
 }
 
 .modal-default-button {

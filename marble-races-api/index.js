@@ -14,7 +14,7 @@ const swaggerDocument = require("./docs/swagger.json")
 
 app.use("/docs",swaggerUI.serve,swaggerUI.setup(swaggerDocument))
 
-require("./routes/app_routes")(app)
+require("./routes/app_routes.js")(app)
 
 app.listen(port,async()=>{
     await require("./db").Sync()

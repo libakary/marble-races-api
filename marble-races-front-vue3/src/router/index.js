@@ -22,6 +22,15 @@ const router = createRouter({
       path: '/addSignUp',
       name: 'addSignUp',
       component: () => import("../views/signUps/CreateSignUpsView.vue")
+    {
+      path: '/competitions', <!--------------------------------------siin võib midagi mitte nii toredat juhtuda-->
+      name: 'competitions',
+      component: () => import("../views/Competitions/AllCompetitionsView.vue"),
+    },
+    {
+      path: "/addCompetition",
+      name: "addCompetition",
+      component: () => import("../views/Competitions/CreateCompetitionView.vue"),
     },
     {
       path: '/about',

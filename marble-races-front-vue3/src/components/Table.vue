@@ -15,8 +15,8 @@
                 {{ item[keyName] }}
             </td>
             <td v-if="showControls">
-                <button @click="$emit('show',item)">Näita</button>
-                <button @click="$emit('delete',item)">Kustuta</button>
+                <button @click="$emit('show', item)">Näita</button>
+                <button @click="$emit('delete', item)">Kustuta</button>
             </td>
             <slot name="additionalColumns"></slot>
         </tr>
@@ -33,7 +33,7 @@
         emits: ["show","delete"],
         computed: {
             keyNames() {
-                return this.items.length >0? Object.keys(this.items[0]) : [];
+                return this.items.length > 0 ? Object.keys(this.items[0]) : [];
             },
         },
     };
