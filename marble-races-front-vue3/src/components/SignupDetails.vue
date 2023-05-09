@@ -29,7 +29,7 @@ export default {
     emits: ["close"],
     data() {
         return {
-            currentSIgnup: {
+            currentSignup: {
                 id: 0, 
                 competitionName: "", 
                 teamName: "", 

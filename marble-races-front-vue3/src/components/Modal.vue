@@ -4,6 +4,7 @@ export default {
     show: Boolean,
     team: Object,
     competitions: Object,
+    signups: Object,
   }
 }
 </script>
