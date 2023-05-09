@@ -4,16 +4,18 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-    <img alt="Vue logo" 
-    class="logo" 
-    src="@/assets/logo.svg" 
-    width="125" 
-    height="125" 
-    />
+    <img 
+      alt="Vue logo" 
+      class="logo" 
+      src="@/assets/logo.svg" 
+      width="125" 
+      height="125" />
 
     <div class="wrapper">
 
       <nav>
+        <RouterLink to="/">All teams</RouterLink>
+        <RouterLink to="/1">All sign ups</RouterLink>
         <RouterLink to="/">All competitions</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
@@ -49,18 +51,22 @@ nav a {
   padding: 0 1rem;
   border-left: 1px solid var(--color-border);
 }
+
 nav a:first-of-type {
   border: 0;
 }
+
 @media (min-width: 1024px) {
   header {
     display: flex;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
   }
+
   .logo {
     margin: 0 2rem 0 0;
   }
+
   header .wrapper {
     display: flex;
     place-items: flex-start;

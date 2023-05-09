@@ -2,9 +2,10 @@
 export default {
   props: {
     show: Boolean,
+    team: Object,
     competitions: Object,
-  },
-};
+  }
+}
 </script>
 
 <template>

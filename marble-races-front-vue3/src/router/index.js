@@ -6,6 +6,25 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
+      component: () => import("../views/teams/AllTeamsView.vue")
+    },
+    {
+      path: '/1',
+      name: 'home1',
+      component: () => import("../views/signUps/AllSignUpsView.vue")
+    },
+    {
+      path: '/addTeam',
+      name: 'addTeam',
+      component: () => import("../views/teams/CreateTeamView.vue")
+    },
+    {
+      path: '/addSignUp',
+      name: 'addSignUp',
+      component: () => import("../views/signUps/CreateSignUpsView.vue")
+    {
+      path: '/competitions', <!--------------------------------------siin võib midagi mitte nii toredat juhtuda-->
+      name: 'competitions',
       component: () => import("../views/Competitions/AllCompetitionsView.vue"),
     },
     {
