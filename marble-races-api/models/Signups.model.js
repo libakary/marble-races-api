@@ -8,6 +8,7 @@ module.exports = (sequelize, Sequelize, Team, Competition) => {
         },
         teamId: {
             type: Sequelize.INTEGER,
+            allowNull: false,
             references: {
                 model: Team,
                 key: "id",
@@ -15,6 +16,7 @@ module.exports = (sequelize, Sequelize, Team, Competition) => {
         },
         competitionId: {
             type: Sequelize.INTEGER,
+            allowNull: false,
             references: {
                 model: Competition,
                 key: "id",

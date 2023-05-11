@@ -1,13 +1,11 @@
 <template>
     <table>
         <caption>
-            {{  
-                caption 
-            }} 
+            {{ caption }}
         </caption>
         <tr>
             <th v-for="(keyName, index) in keyNames" :key="index">
-                {{ keyName }}
+            {{ keyName }}
             </th>
             <th v-if="showControls"></th>
             <slot name="additionalHeaders"></slot>
@@ -42,9 +40,7 @@
 </script>
 
 <style>
-table,
-th,
-td {
-    border: 2px solid rgb(195, 122, 20);
+table, th, td {
+    border: 1px solid #000000;
 }
 </style>
