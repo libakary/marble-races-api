@@ -38,7 +38,6 @@
                     <label for="country">Riik</label>
                 </div>
                 <div class="col-75">
-                    <input id="country" type="text" v-model="country" required />
                     <select v-model="country">
                         <option disabled value="">Vali riik</option>
                         <option v-for="country,index in countries" :key="index" :value="country">
@@ -138,7 +137,7 @@ label {
 }
 
 input[type=submit] {
-  background-color: #4f4f4f;
+  background-color: #04AA6D;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -148,14 +147,15 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #000000;
+    background-color: #45a049;
 }
 
 .container {
   border-radius: 4px;
-  background-color: #f2f2f2;
-  padding: 60px;
+  background-color: #60a655;
+  padding: 20px;
   width: 600px;
+  height: 400px;
 }
 
 .col-25 {

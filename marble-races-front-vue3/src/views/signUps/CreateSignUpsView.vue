@@ -124,7 +124,7 @@ label {
 }
 
 input[type=submit] {
-  background-color: #4f4f4f;
+  background-color: #04AA6D;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -134,14 +134,15 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #000000;
+    background-color: #45a049;
 }
 
 .container {
   border-radius: 4px;
-  background-color: #f2f2f2;
-  padding: 60px;
+  background-color: #60a655;
+  padding: 20px;
   width: 600px;
+  height: 200px;
 }
 
 .col-25 {

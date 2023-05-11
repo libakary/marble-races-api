@@ -56,6 +56,9 @@
 </script>
 
 <style>
+table {
+    background-color: #7c7c7c;
+}
 .modal-container {
   width: 700px;
 }

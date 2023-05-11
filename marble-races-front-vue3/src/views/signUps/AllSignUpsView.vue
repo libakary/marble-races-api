@@ -52,14 +52,14 @@
   
   <script>
   import Table2Template from "../../components/Table2.vue";
-  import SignupDetails from "../../components/SignupDetails.vue";
+  //import SignupDetails from "../../components/SignupDetails.vue";
   import Modal from "../../components/Modal.vue";
   import { RouterLink } from "vue-router";
   
   export default {
     components: {
       Table2Template,
-      SignupDetails, 
+      //SignupDetails, 
       RouterLink,
       Modal,
     },
