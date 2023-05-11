@@ -11,7 +11,11 @@
         <b>Raja tüüp: </b>{{ currentCompetition.trackType }}<br/>
         <b>Võistkondade arv: </b>{{ currentCompetition.numberOfTeams }}<br/>
         <!-- <b>Registreeritud Võistkonnad: </b>{{currentCompetition.signups.join(team.teamName)}}<br/> -->
-        <b>Registreeritud Võistkonnad: </b>{{currentCompetition.signups}}<br/>
+        <b>Registreeritud Võistkonnad: </b>
+        <ul>
+            <li v-for="signup in currentCompetition.signups" :key="signup.id">
+            {{signup.team.teamName}}</li>
+        </ul>
         <b>Asukoht: </b>{{ currentCompetition.location }}<br/>
         <b>Organiseerija: </b>{{ currentCompetition.organizer }}<br/>
       </template>
