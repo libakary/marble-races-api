@@ -1,6 +1,5 @@
 <template>
     <div>
-      <router-link to="/addTeam">Registreeri tiim</router-link><br/>
       <router-link to="/addSignUp">Registreeri signup</router-link><br/>
       <table-template 
         caption="Kõik signupid" 
@@ -54,14 +53,12 @@
   
   <script>
   import TableTemplate from "../../components/Table.vue";
-  import SignupDetails from "../../components/SignupDetails.vue";
   import Modal from "../../components/Modal.vue";
   import { RouterLink } from "vue-router";
   
   export default {
     components: {
       TableTemplate,
-      SignupDetails, 
       RouterLink,
       Modal,
     },

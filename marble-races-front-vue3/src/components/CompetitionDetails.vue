@@ -10,7 +10,7 @@
         <b>Kuupäev: </b>{{ currentCompetition.date }}<br/>
         <b>Raja tüüp: </b>{{ currentCompetition.trackType }}<br/>
         <b>Võistkondade arv: </b>{{ currentCompetition.numberOfTeams }}<br/>
-        <b>Registreeritud Võistkonnad: </b>{{ currentCompetition.signups }}<br/>
+        <b>Registreeritud Võistkonnad: </b>{{ currentSignup.teamName }}<br/>
         <b>Asukoht: </b>{{ currentCompetition.location }}<br/>
         <b>Organiseerija: </b>{{ currentCompetition.organizer }}<br/>
       </template>
@@ -20,7 +20,6 @@
 
 <script>
 import Modal from "./Modal.vue";
-import useDateFormating from "./useDateFormating.js"
 export default {
     components: {
         Modal,
@@ -49,11 +48,17 @@ export default {
                 organizer: "", 
                 signups: [],
             },
+            currentSignup: {
+                id: 0, 
+                competitionName: "", 
+                teamName: "", 
+            },
         };
     },
     beforeUpdate() {
         if (this.competitionDetailId == 0) return;
         this.getDetails()
+        this.getSignUpDetails()
     },
     methods: {
         async getDetails() {
@@ -62,9 +67,12 @@ export default {
             ).json();
             console.log(this.currentCompetition);
         },
-        formatDate(dateString) {
-            return useDateFormating(dateString)
-        }
+        async getSignUpDetails() {
+            this.currentSignup = await (
+                await fetch(`${import.meta.env.VITE_API_URL}/signups/${this.signupDetailId}`)
+            ).json();
+            console.log(this.currentSignup);
+        },
     }
 }
 </script>

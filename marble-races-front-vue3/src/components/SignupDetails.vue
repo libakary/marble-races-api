@@ -15,7 +15,6 @@
 
 <script>
 import Modal from "./Modal.vue";
-import useDateFormating from "./useDateFormating.js"
 export default {
     components: {
         Modal,
@@ -47,9 +46,6 @@ export default {
             ).json();
             console.log(this.currentSignup);
         },
-        formatDate(dateString) {
-            return useDateFormating(dateString)
-        }
     }
 }
 </script>

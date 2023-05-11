@@ -1,7 +1,6 @@
 <template>
     <div>
       <router-link to="/addCompetition">Lisa uus võistlus</router-link><br/>
-      <router-link to="/addSignUp">Registreeri signup</router-link><br/>
       <table-template
         caption="Kõik võistlused" 
         :items="competitions" 
