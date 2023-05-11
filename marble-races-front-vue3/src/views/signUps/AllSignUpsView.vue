@@ -1,15 +1,14 @@
 <template>
     <div>
       <router-link to="/addSignUp">Registreeri signup</router-link><br/>
-      <table-template 
+      <table2-template 
         caption="Kõik signupid" 
         :items="signups" 
         :showControls="true" 
-        @show="signupDetailId = $event.id"
         @delete="signupToDelete = $event"
         >
   
-      </table-template>
+      </table2-template>
     </div>
     
 <!--kõik töötab aga kui ma uncomment'in selle siis tekkib igaveseks pop-up mida ei saa kinni panna-->
@@ -52,13 +51,15 @@
   </template>
   
   <script>
-  import TableTemplate from "../../components/Table.vue";
+  import Table2Template from "../../components/Table2.vue";
+  import SignupDetails from "../../components/SignupDetails.vue";
   import Modal from "../../components/Modal.vue";
   import { RouterLink } from "vue-router";
   
   export default {
     components: {
-      TableTemplate,
+      Table2Template,
+      SignupDetails, 
       RouterLink,
       Modal,
     },

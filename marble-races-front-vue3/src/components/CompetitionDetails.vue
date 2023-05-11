@@ -10,7 +10,7 @@
         <b>Kuupäev: </b>{{ currentCompetition.date }}<br/>
         <b>Raja tüüp: </b>{{ currentCompetition.trackType }}<br/>
         <b>Võistkondade arv: </b>{{ currentCompetition.numberOfTeams }}<br/>
-        <b>Registreeritud Võistkonnad: </b>{{ currentSignup.teamName }}<br/>
+        <b>Registreeritud Võistkonnad: </b>{{ currentCompetition.signups}}<br/>
         <b>Asukoht: </b>{{ currentCompetition.location }}<br/>
         <b>Organiseerija: </b>{{ currentCompetition.organizer }}<br/>
       </template>
@@ -31,6 +31,10 @@ export default {
         },
         signupDetailId: {
             type: Number,
+            required: true,
+        },
+        signupTeamname: {
+            type: Object,
             required: true,
         },
     },
