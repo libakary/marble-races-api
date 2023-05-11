@@ -34,6 +34,7 @@
   <script>
     import TableTemplate from '../../components/Table.vue';
     import CompetitionDetails from "../../components/CompetitionDetails.vue";
+    import SignupDetails from "../../components/SignupDetails.vue";
     import Modal from "../../components/Modal.vue";
     import { RouterLink } from 'vue-router';
     
@@ -41,6 +42,7 @@
       components: {
         TableTemplate,
         CompetitionDetails,
+        SignupDetails,
         RouterLink,
         Modal,
       },
