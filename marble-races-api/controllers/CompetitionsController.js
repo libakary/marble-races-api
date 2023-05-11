@@ -1,3 +1,4 @@
+const { Sequelize } = require('sequelize')
 const {db} = require('../db.js');
 const Competition = db.competitions
 const SignUps = db.signUps
@@ -21,8 +22,8 @@ exports.getById = async (req,res)=> {
       }
     })
 
-    if (competitions == null) {
-        res.status(404).send({error:"Competition not Found"})
+    if (competitions === null) {
+        res.status(404).send({error:"Competition not Found!"})
         return
     }
     
@@ -55,7 +56,7 @@ exports.updateById = async(req, res) =>{
       result = await Competition.update(req.body,{where: {id:req.params.id}})
     } catch (error) {
         console.log("CompetitionsUpdate: ",error)
-        res.status(500).send({error:"Something went wrong on our side, sorry"})
+        res.status(500).send({error:"Something went wrong on our side, sorry :("})
       return
     }
     if (result === null) {
@@ -94,4 +95,17 @@ getBaseUrl = (request) => {
         (request.connection && request.connection.encrypted ? "https" : "http") +
         `://${request.headers.host}`
     )
+}
+
+exports.getTrackTypes = async(req, res) => {
+  const competitions = await Competition.findAll({
+    attributes: ["trackType"],
+    //[Sequelize.fn("distinct", Sequelize.col("trackType")),"trackType"]]})
+    //"trackType"], distinct: true, col:"trackType"})
+    order: [
+      ["trackType"]
+    ]
+    })
+    console.log(competitions.map(competition =>competition.trackType));
+  res.send([... new Set(competitions.map(competition =>competition.trackType))])
 }
