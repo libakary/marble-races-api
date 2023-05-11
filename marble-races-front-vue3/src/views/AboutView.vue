@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>See on lehekülg Marble Võidusõidu entusiastidele!</h1>
   </div>
 </template>
 

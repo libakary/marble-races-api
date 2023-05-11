@@ -7,17 +7,17 @@ import { RouterLink, RouterView } from 'vue-router'
     <img 
       alt="Vue logo" 
       class="logo" 
-      src="@/assets/image.jpg" 
+      src="@/assets/image.png" 
       width="525" 
       height="325" />
 
     <div class="wrapper">
 
       <nav>
-        <RouterLink to="/teams">All teams</RouterLink>
-        <RouterLink to="/signups">All sign ups</RouterLink>
-        <RouterLink to="/competitions">All competitions</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/teams">Kõik tiimid</RouterLink>
+        <RouterLink to="/competitions">Kõik võistlused</RouterLink>
+        <RouterLink to="/signups">Kõik kirjapanekud</RouterLink>
+        <RouterLink to="/about">Meist</RouterLink>
       </nav>
     </div>
   </header>
