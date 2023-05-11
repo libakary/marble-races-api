@@ -20,7 +20,7 @@
         <h3>Võistluse Kustutamine</h3>
       </template>
       <template #body>
-        <p>Oled kindel, et soovid kustutada seda mängu?</p>
+        <p>Oled kindel, et soovid kustutada seda võistlust?</p>
       </template>
       <template #footer>
         <button class="modal-default-button" @click="deleteCompetition()">Jah</button>
@@ -33,7 +33,6 @@
   <script>
     import TableTemplate from '../../components/Table.vue';
     import CompetitionDetails from "../../components/CompetitionDetails.vue";
-    import SignupDetails from "../../components/SignupDetails.vue";
     import Modal from "../../components/Modal.vue";
     import { RouterLink } from 'vue-router';
     
@@ -41,7 +40,6 @@
       components: {
         TableTemplate,
         CompetitionDetails,
-        SignupDetails,
         RouterLink,
         Modal,
       },

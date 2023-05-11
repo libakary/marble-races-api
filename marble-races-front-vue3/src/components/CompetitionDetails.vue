@@ -10,7 +10,7 @@
         <b>Kuupäev: </b>{{ currentCompetition.date }}<br/>
         <b>Raja tüüp: </b>{{ currentCompetition.trackType }}<br/>
         <b>Võistkondade arv: </b>{{ currentCompetition.numberOfTeams }}<br/>
-        <b>Registreeritud Võistkonnad: </b>{{ currentCompetition.signups}}<br/>
+        <!-- <b>Registreeritud Võistkonnad: </b>{{currentCompetition.signups.join(team.teamName)}}<br/> -->
         <b>Asukoht: </b>{{ currentCompetition.location }}<br/>
         <b>Organiseerija: </b>{{ currentCompetition.organizer }}<br/>
       </template>
@@ -29,14 +29,14 @@ export default {
             type: Number,
             required: true,
         },
-        signupDetailId: {
-            type: Number,
-            required: true,
-        },
-        signupTeamname: {
-            type: Object,
-            required: true,
-        },
+        // signupDetailId: {
+        //     type: Number,
+        //     required: true,
+        // },
+        // signupTeamname: {
+        //     type: Object,
+        //     required: true,
+        // },
     },
     emits: ["close"],
     data() {
@@ -47,22 +47,30 @@ export default {
                 datedate: "", 
                 trackType: "", 
                 numberOfTeams: 0, 
-                registeredTeams: [], 
                 location: "", 
                 organizer: "", 
-                signups: [],
+                signups: [
+                    {
+                        id:0,
+                        team:{
+                            id:0,
+                            teamName:"",
+                            teamLeader:""
+                        }
+                    }
+                ],
             },
-            currentSignup: {
-                id: 0, 
-                competitionName: "", 
-                teamName: "", 
-            },
+            // currentSignup: {
+            //     id: 0, 
+            //     competitionName: "", 
+            //     teamName: "", 
+            // },
         };
     },
     beforeUpdate() {
         if (this.competitionDetailId == 0) return;
         this.getDetails()
-        this.getSignUpDetails()
+        //this.getSignUpDetails()
     },
     methods: {
         async getDetails() {
@@ -71,17 +79,20 @@ export default {
             ).json();
             console.log(this.currentCompetition);
         },
-        async getSignUpDetails() {
-            this.currentSignup = await (
-                await fetch(`${import.meta.env.VITE_API_URL}/signups/${this.signupDetailId}`)
-            ).json();
-            console.log(this.currentSignup);
-        },
+        // async getSignUpDetails() {
+        //     this.currentSignup = await (
+        //         await fetch(`${import.meta.env.VITE_API_URL}/signups/${this.signupDetailId}`)
+        //     ).json();
+        //     console.log(this.currentSignup);
+        // },
     }
 }
 </script>
 
 <style>
+table {
+    background-color: #7c7c7c;
+}
 .modal-container {
   width: 700px;
 }

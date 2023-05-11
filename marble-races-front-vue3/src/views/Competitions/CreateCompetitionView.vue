@@ -40,7 +40,6 @@
             </div>
         </div> -->
             <div class="col-75">
-                <input id="trackType" type="text" v-model="trackType" required />
                 <select v-model="trackType">
                     <option disabled value="">Vali rajatüüp</option>
                     <option v-for="trackType, index in trackTypes" :key="index" :value="trackType">
@@ -58,15 +57,14 @@
                 <input id="numberOfTeams" v-model="numberOfTeams" type="number" required/>
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-25">
                 <label for="registeredTeams">Registreeritud võistkonnad</label>
             </div>
             <div class="col-75">
                 <textarea id="registeredTeams" v-model="registeredTeams" type="text" required></textarea>
-                <!-- siia teha ka dropdown?-->
             </div>
-        </div>
+        </div> -->
         <div class="row">
             <div class="col-25">
                 <label for="location">Asukoht</label>
@@ -162,14 +160,24 @@ export default {
   box-sizing: border-box;
 }
 
-input[type=text],
-input[type=number],
-input[type=date], select, textarea {
+input[type=text], select, textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: vertical;
+}
+
+input[type=number], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+}
+
+input[type=date], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
 }
 
 label {
@@ -193,9 +201,10 @@ input[type=submit]:hover {
 
 .container {
   border-radius: 5px;
-  background-color: #302a2a;
+  background-color: #60a655;
   padding: 20px;
-  width: 130%;
+  width: 600px;
+  height: 550px;
 }
 
 .col-25 {
@@ -218,7 +227,7 @@ input[type=submit]:hover {
 }
 
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
   .col-25, .col-75, input[type=submit] {
     width: 100%;
     margin-top: 0;
