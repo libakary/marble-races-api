@@ -204,7 +204,7 @@ input[type=submit]:hover {
   background-color: #60a655;
   padding: 20px;
   width: 600px;
-  height: 550px;
+  height: 450px;
 }
 
 .col-25 {
