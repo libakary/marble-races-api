@@ -35,7 +35,6 @@
     import CompetitionDetails from "../../components/CompetitionDetails.vue";
     import Modal from "../../components/Modal.vue";
     import { RouterLink } from 'vue-router';
-    import moment from 'moment';
     
     export default {
       components: {
